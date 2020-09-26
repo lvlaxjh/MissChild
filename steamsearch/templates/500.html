@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>steam查询</title>
+	<link href="{% static "assets/css/plugins.css" %}" rel="stylesheet">
+	<link href="{% static "assets/css/styles.css" %}" rel="stylesheet">
+	<link href="{% static "assets/css/skin/default.css" %}" rel="stylesheet">
+</head>
+
+<script>
+	function onTopClick() {
+
+		window.location.hash = "#upload";
+
+	}
+
+</script>
+
+<body class="green-skin">
+	<div class="Loader"></div>
+	<div id="main-wrapper">
+		<div class="header header-light">
+			<div class="container-fluid">
+				<nav id="navigation" class="navigation navigation-landscape">
+					<div class="nav-header">
+						<a class="nav-brand" href="{% url 'index' %}">
+							<img src="{% static "assets/img/logo.png" %}" class="logo" alt="" />
+						</a>
+						<div class="nav-toggle"></div>
+					</div>
+					<div class="nav-menus-wrapper" style="transition-property: none;">
+						<ul class="nav-menu">
+							<li class="active"><a href="#">索引<span class="submenu-indicator"></span></a>
+								<ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
+									<li><a href="{% url 'index' %}" class="active">主页</a></li>
+									<!-- <li><a href="home-2.html">Home Style 2</a></li>-->
+								</ul>
+							</li>
+						</ul>
+
+						<ul class="nav-menu nav-menu-social align-to-right">
+							<li class="add-listing theme-bg">
+								<button
+									style="height: 100%;width: 100%;background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;">
+									<a href="{% url 'index' %}">
+										<i class="ti-plus"></i> 上传
+									</a>
+								</button>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+		<!-- End Navigation -->
+		<div class="clearfix"></div>
+		<!-- ================================================================================================================================ -->
+		<!-- ========================================================搜索栏=================================================================== -->
+		<!-- ================================================================================================================================ -->
+		<div class="hero-header jumbo-banner text-center" style="background: url({% static "assets/img/banner500.jpg" %}"
+			);" data-overlay="6">
+			<div class="container">
+				<h1>500!您的操作导致了网站的意外错误!</h1>
+				<h1 style="font-size:35px">{{ error }}</h1>
+				<h1 style="font-size:35px">{{ erLine }}</h1>
+			</div>
+		</div>
+		<footer class="dark-footer skin-dark-footer">
+			<div>
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-3 col-md-3">
+							<div class="footer-widget" style="padding-top:30px;padding-bottom: 30px;">
+								<img src="{% static "assets/img/logo-light.png" %}" class="img-footer" alt="" />
+								<div class="footer-add">
+									<p><a href="https://space.bilibili.com/17879830" target="_blank">我爱守剑阁炫炫</a></p>
+									<p><a href="">乌沫</a></p>
+									<p><a href="https://space.bilibili.com/175397396" target="_blank">大碗豆汁儿</a></p>
+									<!-- <p style='font-size:15'>©2020 dota2饰品吧 版权所有</p> -->
+								</div>
+
+							</div>
+						</div>
+						<div class="col-lg-2-mianze col-md-2-mianze" style="width: 100%;">
+								<div class="footer-widget" style="width: 100%;padding-top:8%;padding-bottom: 30px;">
+									<h4 class="widget-title">免责声明</h4>
+									<ul class="footer-menu">
+										<li><a href="#"></a></li>
+										<li>网站数据查询功能中所有数据均来源于百度贴吧、max+社区以及公开资料整理，
+											查询结果仅供用户参考，并不代表网站立场，我们不对查询结果的真实性、准确性和有效性等承担任何法律责任。
+											若查询结果有误，请直接联系管理员，我们会第一时间给予处理。
+										</li>
+									</ul>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</footer>
+		<!-- ============================ Footer End ================================== -->
+	</div>
+	<!-- ============================================================== -->
+	<!-- End Wrapper -->
+	<!-- ============================================================== -->
+
+	<!-- ============================================================== -->
+	<!-- All Jquery -->
+	<!-- ============================================================== -->
+	<script src="{% static "assets/js/jquery.min.js" %}"></script>
+	<script src="{% static "assets/js/popper.min.js" %}"></script>
+	<script src="{% static "assets/js/bootstrap.min.js" %}"></script>
+	<script src="{% static "assets/js/select2.min.js" %}"></script>
+	<script src="{% static "assets/js/aos.js" %}"></script>
+	<script src="{% static "assets/js/perfect-scrollbar.jquery.min.js" %}"></script>
+	<script src="{% static "assets/js/owl.carousel.min.js" %}"></script>
+	<script src="{% static "assets/js/jquery.counterup.min.js" %}"></script>
+	<script src="{% static "assets/js/slick.js" %}"></script>
+	<script src="{% static "assets/js/bootstrap-datepicker.js" %}"></script>
+	<script src="{% static "assets/js/isotope.min.js" %}"></script>
+	<script src="{% static "assets/js/summernote.js" %}"></script>
+	<script src="{% static "assets/js/jQuery.style.switcher.js" %}"></script>
+	<script src="{% static "assets/js/counterup.min.js" %}"></script>
+	<script src="{% static "assets/js/custom.js" %}"></script>
+	<!-- ============================================================== -->
+	<!-- This page plugins -->
+	<!-- ============================================================== -->
+
+</body>
+<script>
+
+</script>
+<script>
+	//
+	$("input[name='imgFile']").each(function () {
+		var max_size = 1024 * 1024 * 2;
+		$(this).change(function (evt) {
+			var finput = $(this);
+			var files = evt.target.files; // 获得文件对象
+			var output = [];
+			for (var i = 0, f; f = files[i]; i++) {  //检查文件大小
+				if (f.size > max_size) {
+					alert("上传的图片不能超过2m!");
+					$(this).val('');
+				}
+			}
+		});
+	});
+	//
+	$(function () {
+		//录入
+		var committerInformationFLAG = false;
+		var reportInfFLAG = false;
+		$("input[name='committerInformation']").blur(function () {
+			var information = $(this).val().trim();
+			if (information == "") {
+				committerInformationFLAG = false;
+			} else {
+				committerInformationFLAG = true;
+			}
+			if (committerInformationFLAG && reportInfFLAG) {
+				$("button[name='subInf']").removeAttr("disabled");
+			}
+			else {
+				$("button[name='subInf']").attr({ "disabled": "disabled" });
+
+			}
+			// console.log(committerInformationFLAG, reportInfFLAG)
+		});
+		$("input[name='reportQq'],input[name='reportVx'],input[name='reportSteam'],input[name='reportAliPay'],input[name='reportMaxId'],input[name='reportHeiBox'],input[name='reportTieBa']").blur(function () {
+			var information2 = $(this).val().trim();
+			if (information2 == "") {
+				reportInfFLAG = false;
+			} else {
+				reportInfFLAG = true;
+			}
+			if (committerInformationFLAG && reportInfFLAG) {
+				$("button[name='subInf']").removeAttr("disabled");
+			}
+			else {
+				$("button[name='subInf']").attr({ "disabled": "disabled" });
+
+			}
+		});
+	});
+</script>
+
+</html>

@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>审核</title>
+	<link href="{% static "assets/css/plugins.css" %}" rel="stylesheet">
+	<link href="{% static "assets/css/styles.css" %}" rel="stylesheet">
+	<link href="{% static "assets/css/skin/default.css" %}" rel="stylesheet">
+</head>
+<script>
+
+	function onTopClick() {
+
+		window.location.hash = "#upload";
+	}
+
+</script>
+
+<body class="green-skin">
+	<div class="Loader"></div>
+	<div id="main-wrapper">
+		<div class="clearfix"></div>
+		<!-- ================================================================================================================================ -->
+		<!-- ========================================================显示信息================================================================== -->
+		<!-- ================================================================================================================================ -->
+		<section>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						{% for inf in needCheck %}
+						<form method="POST">
+							<div class="job-new-list">
+								<div class="vc-content" style="width: 100%;">
+									<ul class="vc-info-list">
+										<li class="list-inline-item" style="width: 100%;">
+											<h5 style="margin-bottom: 7px;font-size:18px">
+												录入者信息（qq/vx）：<input name="committerInformation"
+													style="width: 60%;border: none;"
+													value="{{ inf.committerInformation }}"></h5>
+											{% if inf.committerUrl == "none" %}
+											<h5 style="margin-bottom: 7px;font-size:18px">举报贴链接：<input
+													name="committerUrl" style="width: 60%;border: none;"
+													value="没有提交网站">
+												{% else %}
+												<h5 style="margin-bottom: 7px;font-size:18px">举报贴链接：<input
+														name="committerUrl" style="width: 60%;border: none;"
+														value="{{ inf.committerUrl }}">
+												</h5>
+												{% endif %}
+												<h5 style="margin-bottom: 7px;font-size:18px">QQ账号：<input
+														name="reportQq" style="width: 60%;border: none;"
+														value="{{ inf.reportQq }}"></h5>
+												<h5 style="margin-bottom: 7px;font-size:18px">微信账号：<input
+														name="reportVx" style="width: 60%;border: none;"
+														value="{{ inf.reportVx }}"></h5>
+												<h5 style="margin-bottom: 7px;font-size:18px">steam
+													ID：<input name="reportSteam" style="width: 60%;border: none;"
+														value="{{  inf.reportSteam }}"></h5>
+												<h5 style="margin-bottom: 7px;font-size:18px">支付宝账号：<input
+														name="reportAliPay" style="width: 60%;border: none;"
+														value="{{ inf.reportAliPay }}">
+												</h5>
+												<h5 style="margin-bottom: 7px;font-size:18px">max+账号：<input
+														name="reportMaxId" style="width: 60%;border: none;"
+														value="{{ inf.reportMaxId }}">
+												</h5>
+												<h5 style="margin-bottom: 7px;font-size:18px">小黑盒账号：<input
+														name="reportHeiBox" style="width: 60%;border: none;"
+														value="{{ inf.reportHeiBox }}">
+												</h5>
+												<h5 style="margin-bottom: 7px;font-size:18px">贴吧账号：<input
+														name="reportTieBa" style="width: 60%;border: none;"
+														value="{{ inf.reportTieBa }}">
+												</h5>
+												<h5 style="margin-bottom: 7px;font-size:5px;margin-left:90%">
+													记录编号：{{ inf.id }}</h5>
+
+										</li>
+									</ul>
+								</div>
+
+								<div style="margin-top:10px;margin-bottom:10px;">
+									<button name="inputBtn" type="submit" value="{{ inf.id }}"
+										style="border:none;background-color: #4ba559;width:15%;height:50px;">录入</button>
+									<button name="delBtn" type="submit" value="{{ inf.id }}"
+										style="border:none;background-color: #d23f3f;width:15%;height:50px;">删除</button>
+								</div>
+								{% for i in inf.img %}
+								<img src="/media/{{ i }}" style="width:99%;height: 99%;margin-top:1%;margin-bottom:1%">
+								{% endfor %}
+							</div>
+						</form>
+						{% endfor %}
+						<!-- <div class="job-new-list">
+							<div class="vc-thumb">
+								<img class="img-fluid rounded-circle" src="assets/img/asana.png" alt="c2.jpg">
+							</div>
+							<div class="vc-content">
+								<h5 class="title"><a href="job-detail.html">App Developer</a><span
+										class="j-part-time">Part Time</span></h5>
+								<p>Apple Soft.</p>
+								<ul class="vc-info-list">
+									<li class="list-inline-item">
+										<h5>Sallery</h5> <i class="ti-credit-card"></i>$4.5k-$5k P.A
+									</li>
+									<li class="list-inline-item">
+										<h5>Skills</h5>
+										<div class="skills">
+											<span>Html</span><span>Css3</span><span>java</span><span>+3 more</span>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<a class="btn btn-primary bn-det" href="job-detail.html">Apply Now<i
+									class="ti-arrow-right ml-1"></i></a>
+						</div> -->
+					</div>
+				</div>
+
+			</div>
+		</section>
+		<div class="clearfix"></div>
+		<section></section>
+		<section></section>
+		<!-- ================================================================================================================================ -->
+		<!-- ========================================================底栏===================================================================== -->
+		<!-- ================================================================================================================================ -->
+		<!-- <footer class="dark-footer skin-dark-footer">
+			<div>
+				<div class="container">
+					<div class="row">
+
+						<div class="col-lg-3 col-md-3">
+							<div class="footer-widget" style="padding-top:30px;padding-bottom: 30px;">
+								<img ssrc="{% static "assets/img/logo-light.png" %}" class="img-footer" alt="" />
+								<div class="footer-add">
+									<p>Collins Street West, Victoria,</br> Australia (AU4578).</p>
+									
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</footer> -->
+		<!-- ============================ Footer End ================================== -->
+	</div>
+	<!-- ============================================================== -->
+	<!-- End Wrapper -->
+	<!-- ============================================================== -->
+
+	<!-- ============================================================== -->
+	<!-- All Jquery -->
+	<!-- ============================================================== -->
+	<script src="{% static "assets/js/jquery.min.js" %}"></script>
+	<script src="{% static "assets/js/popper.min.js" %}"></script>
+	<script src="{% static "assets/js/bootstrap.min.js" %}"></script>
+	<script src="{% static "assets/js/select2.min.js" %}"></script>
+	<script src="{% static "assets/js/aos.js" %}"></script>
+	<script src="{% static "assets/js/perfect-scrollbar.jquery.min.js" %}"></script>
+	<script src="{% static "assets/js/owl.carousel.min.js" %}"></script>
+	<script src="{% static "assets/js/jquery.counterup.min.js" %}"></script>
+	<script src="{% static "assets/js/slick.js" %}"></script>
+	<script src="{% static "assets/js/bootstrap-datepicker.js" %}"></script>
+	<script src="{% static "assets/js/isotope.min.js" %}"></script>
+	<script src="{% static "assets/js/summernote.js" %}"></script>
+	<script src="{% static "assets/js/jQuery.style.switcher.js" %}"></script>
+	<script src="{% static "assets/js/counterup.min.js" %}"></script>
+	<script src="{% static "assets/js/custom.js" %}"></script>
+	<!-- ============================================================== -->
+	<!-- This page plugins -->
+	<!-- ============================================================== -->
+
+</body>
+
+</html>
