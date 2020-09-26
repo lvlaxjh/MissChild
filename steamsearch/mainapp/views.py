@@ -64,12 +64,10 @@ def index(request):
             try:
                 # 搜索-start
                 searchContent = request.POST.get('searchContent')
-                searchSelect = request.POST.get('searchSelect')
                 if searchContent == '':  # 搜索为空刷新主页
                     return redirect('index')
                 else:  # url反转搜索内容
-                    pass
-                    # return redirect(reverse('results', kwargs={'searchContent': str(searchContent), 'searchSelect': str(searchSelect), 'u': '*', 'p': '*'}))
+                    return redirect(reverse('results', kwargs={'searchContent': str(searchContent), 'searchSelect': str(searchSelect), 'u': '*', 'p': '*'}))
                 # 搜索-end
             except Exception as e:
                 return errorFunc(request, e, sys._getframe().f_lineno)

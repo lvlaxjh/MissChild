@@ -4169,6 +4169,7 @@ pre code {
 .col-lg-12,
 .col-lg-2,
 .col-lg-2-mianze,
+.col-lg-2-mianze2,
 .col-lg-3,
 .col-lg-4,
 .col-lg-5,
@@ -4184,6 +4185,7 @@ pre code {
 .col-md-12,
 .col-md-2,
 .col-md-2-mianze,
+.col-md-2-mianze2,
 .col-md-3,
 .col-md-4,
 .col-md-5,
@@ -4550,13 +4552,20 @@ pre code {
         flex: 0 0 20%;
         max-width: 20%
     }
+
     .col-md-2-mianze {
-            -ms-flex: 0 0 70%;
-            flex: 0 0 70%;
-            max-width: 70%
+        -ms-flex: 0 0 30%;
+        flex: 0 0 30%;
+        max-width: 30%
     }
 
-    .col-md-3 {
+    .col-md-2-mianze2 {
+        -ms-flex: 0 0 30%;
+        flex: 0 0 30%;
+        max-width: 30%
+    }
+
+    Î .col-md-3 {
         -ms-flex: 0 0 25%;
         flex: 0 0 25%;
         max-width: 25%
@@ -4704,10 +4713,16 @@ pre code {
         flex: 0 0 20%;
         max-width: 20%
     }
+
     .col-lg-2-mianze {
-        -ms-flex: 0 0 70%;
-        flex: 0 0 70%;
-        max-width: 70%
+        -ms-flex: 0 0 30%;
+        flex: 0 0 30%;
+        max-width: 30%
+    }
+    .col-lg-2-mianze2 {
+        -ms-flex: 0 0 30%;
+        flex: 0 0 30%;
+        max-width: 30%
     }
 
     .col-lg-3 {

@@ -38,7 +38,6 @@
 							<li class="active"><a href="#">索引<span class="submenu-indicator"></span></a>
 								<ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
 									<li><a href="{% url 'index' %}" class="active">主页</a></li>
-									<!-- <li><a href="home-2.html">Home Style 2</a></li>-->
 								</ul>
 							</li>
 						</ul>
@@ -66,7 +65,7 @@
 			);" data-overlay="6">
 			<div class="container">
 				<h1>失联儿童查询</h1>
-				<p class="lead">本网站查询和登记失联儿童信息。</p>
+				<p class="lead">共同保护我们的孩子，你我可以做得更多。</p>
 				<form method="POST" class="search-big-form no-border search-shadow">
 					<div class="row m-0" style="width:100%">
 						<div class="col-lg-4 col-md-4 col-sm-12 p-0">
@@ -110,31 +109,17 @@
 										<i class="ti-home theme-cl"></i>
 									</div>
 									<div class="add-text-box">
-										<h4>负责</h4>
-										为保证真实性，我们全部采用人工审核方式<br>
-										如有疑问请联系管理员<br>
+										<h4>注意！</h4>
+										本网站用于查询和搜索失联儿童。<br>
 									</div>
 								</div>
-								<!--
-								<div class="add-box">
-									<div class="add-icon-box">
-										<i class="ti-map-alt theme-cl"></i>
-									</div>
-									<div class="add-text-box">
-										<h4>Head Offices</h4>
-										810 Clis Road,<br>
-										Indraprash NW11 0PU, India
-									</div>
-								</div> -->
 								<div class="add-box">
 									<div class="add-icon-box">
 										<i class="ti-email theme-cl"></i>
 									</div>
 									<div class="add-text-box">
-										<h4>管理员邮箱</h4>
-										853862980@qq.com<br>
-										844540@qq.com<br>
-										2876363140@qq.com<br>
+										<h4>开发者</h4>
+										金昊宸<br>
 									</div>
 								</div>
 								<div class="add-box">
@@ -142,11 +127,7 @@
 										<i class="ti-headphone theme-cl"></i>
 									</div>
 									<div class="add-text-box">
-										<h4>管理员QQ</h4>
-										<a target="_blank"
-											href="http://wpa.qq.com/msgrd?v=3&uin=853862980&site=qq&menu=yes">853862980</a><br>
-										<a target="_blank"
-											href="http://wpa.qq.com/msgrd?v=3&uin=844540&site=qq&menu=yes">844540</a><br>
+										<h4>联系开发者</h4>
 										<a target="_blank"
 											href="http://wpa.qq.com/msgrd?v=3&uin=2876363140&site=qq&menu=yes">2876363140</a><br>
 									</div>
@@ -156,53 +137,78 @@
 						<div class="col-lg-7 col-md-7">
 							<div class="contact-form">
 								<form method="POST" enctype="multipart/form-data">
-									<label style="font-size:30px">您的信息</label>
+									<label style="font-size:30px">失联者信息</label>
 									<div class="form-group">
-										<label>QQ账号/微信账号<label
-												style="color: rgba(255, 0, 0, 0.6);">（此项必填）</label></label>
-										<input name="committerInformation" type="text" class="form-control"
-											placeholder="获得即时反馈">
+										<label>姓名<label style="color: rgba(255, 0, 0, 0.6);">（此项必填）</label></label>
+										<input name="missCName" type="text" class="form-control" placeholder="失联者姓名">
 									</div>
 									<div class="form-group">
-										<label>发布的举报贴链接</label>
-										<input name="committerUrl" type="text" class="form-control"
-											placeholder="贴吧或max+举报帖子链接，帮助我们更好确认">
+										<label>性别</label>
+										<select name="missCsex" id="category1" class="js-states form-control">
+											<option value="none">其他</option>
+											<option value="nan">男</option>
+											<option value="nv">女</option>
+										</select>
 									</div>
 									<div class="form-group">
-										<label>上传图片（帮助我们更好确认）</label><br>
-										<input type="file" name="imgFile" accept="image/*" multiple="multiple" />
-
-									</div>
-									<label style="font-size:30px">举报信息</label>
-									<label style="font-size:15px;color: rgba(255, 0, 0, 0.6);">（下列至少填入一项）</label>
-									<div class="form-group">
-										<label>QQ账号</label>
-										<input name="reportQq" type="text" class="form-control" placeholder="QQ账号">
+										<label>身高</label>
+										<input name="missCheight" type="text" class="form-control"
+											placeholder="身高（厘米min）">
 									</div>
 									<div class="form-group">
-										<label>微信账号</label>
-										<input name="reportVx" type="text" class="form-control" placeholder="微信账号">
+										<label>体重</label>
+										<input name="missCweight" type="text" class="form-control"
+											placeholder="体重（千克kg）">
 									</div>
 									<div class="form-group">
-										<label>steam ID</label>
-										<input name="reportSteam" type="text" class="form-control"
-											placeholder="steam数字ID">
+										<label>出生日期</label>
+										<select name="missCbirthdayY" id="category2" class="sel_year">
+										</select>
+										<div style="margin-top:10px"></div>
+										<select name="missCbirthdayM" id="category3" class="sel_month">
+										</select>
+										<div style="margin-top:10px"></div>
+										<select name="missCbirthdayD" id="category4" class="sel_day">
+										</select>
 									</div>
 									<div class="form-group">
-										<label>支付宝账号</label>
-										<input name="reportAliPay" type="text" class="form-control" placeholder="支付宝账号">
+										<label>走失日期</label>
+										<select name="missCtimeY" id="category5" class="sel_year1">
+										</select>
+										<div style="margin-top:10px"></div>
+										<select name="missCtimeM" id="category6" class="sel_month1">
+										</select>
+										<div style="margin-top:10px"></div>
+										<select name="missCtimeD" id="category7" class="sel_day1">
+										</select>
+										<div style="margin-top:10px"></div>
+										<select name="missCtimeMin" id="category8" class="sel_hour1">
+										</select>
+										<div style="margin-top:10px"></div>
+										<select name="missCtimeS" id="category9" class="sel_min1">
+										</select>
 									</div>
 									<div class="form-group">
-										<label>max+账号</label>
-										<input name="reportMaxId" type="text" class="form-control" placeholder="max+账号">
+										<label>走失位置</label>
+										<input name="missCsite" type="text" class="form-control" placeholder="最后失联位置">
 									</div>
 									<div class="form-group">
-										<label>小黑盒账号</label>
-										<input name="reportHeiBox" type="text" class="form-control" placeholder="小黑盒账号">
+										<label>其他信息</label>
+										<textarea name="missCtext" type="text" class="form-control"
+											placeholder="尽可能详尽的描述信息"></textarea>
 									</div>
 									<div class="form-group">
-										<label>贴吧账号</label>
-										<input name="reportTieBa" type="text" class="form-control" placeholder="贴吧账号">
+										<label>上传图片</label><br>
+										<input type="file" name="missCimg" accept="image/*" multiple="multiple" />
+									</div>
+									<label style="font-size:30px">失联者家属信息</label>
+									<div class="form-group">
+										<label>家属称呼</label>
+										<input name="kinName" type="text" class="form-control" placeholder="姓氏/名称">
+									</div>
+									<div class="form-group">
+										<label>家属联系方式</label>
+										<input name="kinLine" type="text" class="form-control" placeholder="联系方式">
 									</div>
 									<button value='subInf' disabled="disabled" name="subInf" type="submit"
 										class="btn btn-primary">提交审核</button>
@@ -265,27 +271,38 @@
 							<div class="footer-widget" style="padding-top:30px;padding-bottom: 30px;">
 								<img src="{% static "assets/img/logo-light.png" %}" class="img-footer" alt="" />
 								<div class="footer-add">
-									<p><a href="https://space.bilibili.com/17879830" target="_blank">我爱守剑阁炫炫</a></p>
-									<p><a href="">乌沫</a></p>
-									<p><a href="https://space.bilibili.com/175397396" target="_blank">大碗豆汁儿</a></p>
+									<p><a href="https://space.bilibili.com/175397396" target="_blank">金昊宸</a></p>
 									<!-- <p style='font-size:15'>©2020 dota2饰品吧 版权所有</p> -->
 								</div>
 
 							</div>
 						</div>
 						<div class="col-lg-2-mianze col-md-2-mianze" style="width: 100%;">
-								<div class="footer-widget" style="width: 100%;padding-top:8%;padding-bottom: 30px;">
-									<h4 class="widget-title">免责声明</h4>
-									<ul class="footer-menu">
-										<li><a href="#"></a></li>
-										<li>网站数据查询功能中所有数据均来源于百度贴吧、max+社区以及公开资料整理，
-											查询结果仅供用户参考，并不代表网站立场，我们不对查询结果的真实性、准确性和有效性等承担任何法律责任。
-											若查询结果有误，请直接联系管理员，我们会第一时间给予处理。
-										</li>
-									</ul>
-								</div>
+							<div class="footer-widget" style="width: 100%;padding-top:8%;padding-bottom: 30px;">
+								<h4 class="widget-title">友情连接</h4>
+								<ul class="footer-menu">
+									<li><a href="http://xunren.baidu.com/index.html" target="_blank">百度寻人</a></li>
+									<li><a href="http://chinaxrw.com/" target="_blank">中国寻人网</a></li>
+									<li><a href="https://www.szrksjzx.com/" target="_blank">寻亲网</a></li>
+
+								</ul>
+							</div>
 						</div>
-					</div>
+						<!-- <div class="col-lg-2-mianze2 col-md-2-mianze2" style="width: 100%;">
+							<div class="footer-widget" style="width: 100%;padding-top:8%;padding-bottom: 30px;">
+								<h4 class="widget-title">&nbsp</h4>
+								<ul class="footer-menu">
+									<li><a href="#">123231</a></li>
+									<li><a href="#">123231</a></li>
+									<li><a href="#">123231</a></li>
+									<li><a href="#">123231</a></li>
+									<li><a href="#">123231</a></li>
+									<li><a href="#">123231</a></li>
+									<li><a href="#">123231</a></li>
+								</ul>
+							</div>
+						</div>
+					</div> -->
 				</div>
 			</div>
 
@@ -314,14 +331,16 @@
 	<script src="{% static "assets/js/jQuery.style.switcher.js" %}"></script>
 	<script src="{% static "assets/js/counterup.min.js" %}"></script>
 	<script src="{% static "assets/js/custom.js" %}"></script>
+
 	<!-- ============================================================== -->
+	<script src="{% static "assets/js/jquery.time.js" %}"></script>
+	<script src="{% static "assets/js/birthday.js" %}"></script>
+	<script src="{% static "assets/js/misstime.js" %}"></script>
 	<!-- This page plugins -->
 	<!-- ============================================================== -->
 
 </body>
-<script>
 
-</script>
 <script>
 	//
 	$("input[name='imgFile']").each(function () {
@@ -342,8 +361,8 @@
 	$(function () {
 		//录入
 		var committerInformationFLAG = false;
-		var reportInfFLAG = false;
-		$("input[name='committerInformation']").blur(function () {
+		var reportInfFLAG = true;
+		$("input[name='missCName']").blur(function () {
 			var information = $(this).val().trim();
 			if (information == "") {
 				committerInformationFLAG = false;
@@ -359,21 +378,188 @@
 			}
 			// console.log(committerInformationFLAG, reportInfFLAG)
 		});
-		$("input[name='reportQq'],input[name='reportVx'],input[name='reportSteam'],input[name='reportAliPay'],input[name='reportMaxId'],input[name='reportHeiBox'],input[name='reportTieBa']").blur(function () {
-			var information2 = $(this).val().trim();
-			if (information2 == "") {
-				reportInfFLAG = false;
-			} else {
-				reportInfFLAG = true;
-			}
-			if (committerInformationFLAG && reportInfFLAG) {
-				$("button[name='subInf']").removeAttr("disabled");
-			}
-			else {
-				$("button[name='subInf']").attr({ "disabled": "disabled" });
+	});
+</script>
+<script>
+	$('#category1').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
 
-			}
-		});
+	$('#category1-side').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category1-2').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category1-3').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+	//
+	$('#category2').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category2-side').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category2-2').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category2-3').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+	//
+	$('#category3').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category3-side').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category3-2').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category3-3').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	//
+	$('#category4').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category4-side').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category4-2').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category4-3').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+	//
+	$('#category5').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category5-side').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category5-2').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category5-3').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+	//
+	$('#category6').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category6-side').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category6-2').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category6-3').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+	//
+	$('#category7').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category7-side').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category7-2').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category7-3').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+	//
+	$('#category8').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category8-side').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category8-2').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category8-3').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+	//
+	$('#category9').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category9-side').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category9-2').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
+	});
+
+	$('#category9-3').select2({
+		placeholder: "选择查询内容",
+		allowClear: true
 	});
 </script>
 

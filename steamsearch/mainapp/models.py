@@ -1,7 +1,7 @@
 '''
 Author: your name
 Date: 2020-08-18 13:51:41
-LastEditTime: 2020-09-26 21:06:51
+LastEditTime: 2020-09-26 22:27:57
 LastEditors: Please set LastEditors
 Description: In User Settings Edit
 FilePath: /steamsearch/mainapp/models.py
@@ -20,7 +20,7 @@ class People(models.Model):
     weight = models.TextField(
         "走失者-体重", default="none")
     timeL = models.TextField(
-        "走失者-出生日期", default="none$none$none$none$none")  # 格式为：年-月-日-时-分
+        "走失者-走失日期", default="none$none$none$none$none")  # 格式为：年-月-日-时-分
     site = models.TextField("走失者-走失地区", default="none")
     text = models.TextField("走失者-描述", default="none")
     kinName = models.TextField("亲属-称呼", default="none")
