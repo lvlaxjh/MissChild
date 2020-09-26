@@ -4546,9 +4546,9 @@ pre code {
     }
 
     .col-md-2 {
-        -ms-flex: 0 0 15%;
-        flex: 0 0 15%;
-        max-width: 15%
+        -ms-flex: 0 0 20%;
+        flex: 0 0 20%;
+        max-width: 20%
     }
     .col-md-2-mianze {
             -ms-flex: 0 0 70%;
@@ -4563,9 +4563,9 @@ pre code {
     }
 
     .col-md-4 {
-        -ms-flex: 0 0 60%;
-        flex: 0 0 60%;
-        max-width: 60%
+        -ms-flex: 0 0 80%;
+        flex: 0 0 80%;
+        max-width: 80%
     }
 
     .col-md-5 {
@@ -4700,9 +4700,9 @@ pre code {
     }
 
     .col-lg-2 {
-        -ms-flex: 0 0 15%;
-        flex: 0 0 15%;
-        max-width: 15%
+        -ms-flex: 0 0 20%;
+        flex: 0 0 20%;
+        max-width: 20%
     }
     .col-lg-2-mianze {
         -ms-flex: 0 0 70%;
@@ -4717,9 +4717,9 @@ pre code {
     }
 
     .col-lg-4 {
-        -ms-flex: 0 0 60%;
-        flex: 0 0 60%;
-        max-width: 60%
+        -ms-flex: 0 0 80%;
+        flex: 0 0 80%;
+        max-width: 80%
     }
 
     .col-lg-5 {
