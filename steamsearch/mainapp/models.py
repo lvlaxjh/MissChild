@@ -1,7 +1,7 @@
 '''
 Author: your name
 Date: 2020-08-18 13:51:41
-LastEditTime: 2020-09-27 10:27:31
+LastEditTime: 2020-09-27 14:32:36
 LastEditors: Please set LastEditors
 Description: In User Settings Edit
 FilePath: /steamsearch/mainapp/models.py
@@ -25,7 +25,6 @@ class People(models.Model):
     text = models.TextField("走失者-描述", default="none")
     kinName = models.TextField("亲属-称呼", default="none")
     kinLink = models.TextField("亲属-联系方式", default="none")
-
 
 #失联者图片
 class PeopleImg(models.Model):

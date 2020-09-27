@@ -80,17 +80,21 @@
 							<div class="vc-content" style="width: 100%;">
 								<ul class="vc-info-list">
 									<li class="list-inline-item" style="width: 100%;">
+										
 										{% for i in inf.img %}
-										<img src="/media/{{ i }}" style="width:99%;height: 99%;margin-top:1%;margin-bottom:1%">
+										<!-- <div style="width: 100%;height: 100%;"></div> -->
+										<center><img src="/media/{{ i }}" style="width: auto;height: auto;max-width: 800px;max-height: 500px;"></center>
+										<!-- </div> -->
 										{% endfor %}
+										
+										<div style="margin-top:15px"></div>
 										<h5 style="margin-bottom: 7px;font-size:18px">姓名：{{ inf.name }}</h5>
 										<h5 style="margin-bottom: 7px;font-size:18px">性别：{{ inf.sex }}</h5>
 										<h5 style="margin-bottom: 7px;font-size:18px">走失地点：{{  inf.site }}
 										</h5>
-										<h5 style="margin-bottom: 7px;font-size:18px">走失日期：{{ inf.timeLY }}年,{{ inf.timeLM }}月,{{ inf.timeLD }}日,{{ inf.timeLH }}时,{{ inf.timeLMin }}分</h5>
-
+										<h5 style="margin-bottom: 7px;font-size:18px">走失日期：{{ inf.timeLY }}年.{{ inf.timeLM }}月.{{ inf.timeLD }}日.{{ inf.timeLH }}时.{{ inf.timeLMin }}分</h5>
 										<h5 style="margin-bottom: 7px;font-size:5px;margin-left:90%">记录编号：{{ inf.id }}</h5>
-										<button name="inputBtn" type="submit" value="{{ inf.id }}"
+										<button name="contentBtn" type="submit" value="{{ inf.id }}"
 											style="border:none;background-color: #4ba559;width:15%;height:50px;">查看详细信息</button>
 									</li>
 								</ul>
