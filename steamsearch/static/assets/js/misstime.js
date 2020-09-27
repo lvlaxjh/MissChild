@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-09-26 23:03:33
- * @LastEditTime: 2020-09-26 23:59:37
+ * @LastEditTime: 2020-09-27 10:49:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /steamsearch/static/assets/js/birthday.js
@@ -67,7 +67,7 @@
             var MinSel = $MinSelector1.attr("rel");
             for (var i = 1; i <= 60; i++) {
                 var sed = MinSel == i ? "selected" : "";
-                var minStr = "<option value=\"" + i + "\" " + sed + ">" + i + "分钟</option>";
+                var minStr = "<option value=\"" + i + "\" " + sed + ">" + i + "分</option>";
                 $MinSelector1.append(minStr);
             }
             // 日列表(仅当选择了年月)

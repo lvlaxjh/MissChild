@@ -37,7 +37,6 @@
 							<li class="active"><a href="#">索引<span class="submenu-indicator"></span></a>
 								<ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
 									<li><a href="{% url 'index' %}" class="active">主页</a></li>
-									<li><a href="{% url 'thank' %}" class="active">特别鸣谢</a></li>
 									<!-- <li><a href="home-2.html">Home Style 2</a></li>-->
 								</ul>
 							</li>
@@ -75,109 +74,30 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						{% if flag %}
 						{% for inf in res %}
+						<form method="POST">
 						<div class="job-new-list">
 							<div class="vc-content" style="width: 100%;">
 								<ul class="vc-info-list">
 									<li class="list-inline-item" style="width: 100%;">
-										<h5 style="margin-bottom: 7px;font-size:18px">QQ账号：{{ inf.reportQq }}</h5>
-										<h5 style="margin-bottom: 7px;font-size:18px">微信账号：{{ inf.reportVx }}</h5>
-										<h5 style="margin-bottom: 7px;font-size:18px">steam ID：{{  inf.reportSteam }}
+										{% for i in inf.img %}
+										<img src="/media/{{ i }}" style="width:99%;height: 99%;margin-top:1%;margin-bottom:1%">
+										{% endfor %}
+										<h5 style="margin-bottom: 7px;font-size:18px">姓名：{{ inf.name }}</h5>
+										<h5 style="margin-bottom: 7px;font-size:18px">性别：{{ inf.sex }}</h5>
+										<h5 style="margin-bottom: 7px;font-size:18px">走失地点：{{  inf.site }}
 										</h5>
-										<h5 style="margin-bottom: 7px;font-size:18px">支付宝账号：{{ inf.reportAliPay }}</h5>
-										<h5 style="margin-bottom: 7px;font-size:18px">max+账号：{{ inf.reportMaxId }}</h5>
-										<h5 style="margin-bottom: 7px;font-size:18px">小黑盒账号：{{ inf.reportHeiBox }}</h5>
-										<h5 style="margin-bottom: 7px;font-size:18px">贴吧账号：{{ inf.reportTieBa }}</h5>
-										{% if inf.committerUrl == "none" %}
-										<h5 style="margin-bottom: 7px;font-size:18px">贴子链接：无举报贴链接</h5>
-										{% else %}
-										<h5 style="margin-bottom: 7px;font-size:18px">贴子链接：<a target="_blank"
-												href="{{ inf.committerUrl }}">{{ inf.committerUrl }}</a></h5>
-										{% endif %}
+										<h5 style="margin-bottom: 7px;font-size:18px">走失日期：{{ inf.timeLY }}年,{{ inf.timeLM }}月,{{ inf.timeLD }}日,{{ inf.timeLH }}时,{{ inf.timeLMin }}分</h5>
+
 										<h5 style="margin-bottom: 7px;font-size:5px;margin-left:90%">记录编号：{{ inf.id }}</h5>
+										<button name="inputBtn" type="submit" value="{{ inf.id }}"
+											style="border:none;background-color: #4ba559;width:15%;height:50px;">查看详细信息</button>
 									</li>
 								</ul>
 							</div>
 						</div>
-						{% endfor %}
-						{% else %}
-						{% for inf in res %}
-						<form method="POST">
-							<div class="job-new-list">
-								<div class="vc-content" style="width: 100%;">
-									<ul class="vc-info-list">
-										<li class="list-inline-item" style="width: 100%;">
-											{% if inf.committerUrl == "none" %}
-											<h5 style="margin-bottom: 7px;font-size:18px">举报贴链接：<input name="committerUrl" style="width: 60%;border: none;"
-													value="没有提交网站">
-											</h5>
-											{% else %}
-											<h5 style="margin-bottom: 7px;font-size:18px">举报贴链接：<input name="committerUrl" style="width: 60%;border: none;"
-													value="{{ inf.committerUrl }}">
-											</h5>
-											{% endif %}
-											<h5 style="margin-bottom: 7px;font-size:18px">QQ账号：<input name="reportQq"
-													style="width: 60%;border: none;" value="{{ inf.reportQq }}"></h5>
-											<h5 style="margin-bottom: 7px;font-size:18px">微信账号：<input name="reportVx"
-													style="width: 60%;border: none;" value="{{ inf.reportVx }}"></h5>
-											<h5 style="margin-bottom: 7px;font-size:18px">steam
-												ID：<input name="reportSteam" style="width: 60%;border: none;"
-													value="{{  inf.reportSteam }}">
-											</h5>
-											<h5 style="margin-bottom: 7px;font-size:18px">支付宝账号：<input
-													name="reportAliPay" style="width: 60%;border: none;"
-													value="{{ inf.reportAliPay }}">
-											</h5>
-											<h5 style="margin-bottom: 7px;font-size:18px">max+账号：<input
-													name="reportMaxId" style="width: 60%;border: none;"
-													value="{{ inf.reportMaxId }}">
-											</h5>
-											<h5 style="margin-bottom: 7px;font-size:18px">小黑盒账号：<input
-													name="reportHeiBox" style="width: 60%;border: none;"
-													value="{{ inf.reportHeiBox }}">
-											</h5>
-											<h5 style="margin-bottom: 7px;font-size:18px">贴吧账号：<input name="reportTieBa"
-													style="width: 60%;border: none;" value="{{ inf.reportTieBa }}">
-											</h5>
-											<h5 style="margin-bottom: 7px;font-size:5px;margin-left:90%">记录编号：{{ inf.id }}</h5>
-										</li>
-									</ul>
-								</div>
-								<div style="margin-top:10px">
-									<button name="inputBtn" type="submit" value="{{ inf.id }}"
-										style="border:none;background-color: #4ba559;width:15%;height:50px;">保存</button>
-									<button name="delBtn" type="submit" value="{{ inf.id }}"
-										style="border:none;background-color: #d23f3f;width:15%;height:50px;">删除</button>
-								</div>
-
-							</div>
 						</form>
 						{% endfor %}
-						{% endif %}
-						<!-- <div class="job-new-list">
-							<div class="vc-thumb">
-								<img class="img-fluid rounded-circle" src="assets/img/asana.png" alt="c2.jpg">
-							</div>
-							<div class="vc-content">
-								<h5 class="title"><a href="job-detail.html">App Developer</a><span
-										class="j-part-time">Part Time</span></h5>
-								<p>Apple Soft.</p>
-								<ul class="vc-info-list">
-									<li class="list-inline-item">
-										<h5>Sallery</h5> <i class="ti-credit-card"></i>$4.5k-$5k P.A
-									</li>
-									<li class="list-inline-item">
-										<h5>Skills</h5>
-										<div class="skills">
-											<span>Html</span><span>Css3</span><span>java</span><span>+3 more</span>
-										</div>
-									</li>
-								</ul>
-							</div>
-							<a class="btn btn-primary bn-det" href="job-detail.html">Apply Now<i
-									class="ti-arrow-right ml-1"></i></a>
-						</div> -->
 					</div>
 				</div>
 
@@ -193,34 +113,47 @@
 			<div>
 				<div class="container">
 					<div class="row">
-
+		
 						<div class="col-lg-3 col-md-3">
 							<div class="footer-widget" style="padding-top:30px;padding-bottom: 30px;">
 								<img src="{% static "assets/img/logo-light.png" %}" class="img-footer" alt="" />
 								<div class="footer-add">
-									<p><a href="https://space.bilibili.com/17879830" target="_blank">我爱守剑阁炫炫</a></p>
-									<p><a href="">乌沫</a></p>
-									<p><a href="https://space.bilibili.com/175397396" target="_blank">大碗豆汁儿</a></p>
+									<h4 class="widget-title">开发者</h4>
+									<p><a href="https://space.bilibili.com/175397396" target="_blank">金昊宸</a></p>
+									<!-- <p style='font-size:15'>©2020 dota2饰品吧 版权所有</p> -->
 								</div>
-
+		
 							</div>
 						</div>
 						<div class="col-lg-2-mianze col-md-2-mianze" style="width: 100%;">
 							<div class="footer-widget" style="width: 100%;padding-top:8%;padding-bottom: 30px;">
-								<h4 class="widget-title">免责声明</h4>
+								<h4 class="widget-title">友情连接</h4>
 								<ul class="footer-menu">
-									<li><a href="#"></a></li>
-									<li>网站数据查询功能中所有数据均来源于百度贴吧、max+社区以及公开资料整理，
-										查询结果仅供用户参考，并不代表网站立场，我们不对查询结果的真实性、准确性和有效性等承担任何法律责任。
-										若查询结果有误，请直接联系管理员，我们会第一时间给予处理。
-									</li>
+									<li><a href="http://xunren.baidu.com/index.html" target="_blank">百度寻人</a></li>
+									<li><a href="http://chinaxrw.com/" target="_blank">中国寻人网</a></li>
+									<li><a href="https://www.szrksjzx.com/" target="_blank">寻亲网</a></li>
+		
 								</ul>
 							</div>
 						</div>
+						<!-- <div class="col-lg-2-mianze2 col-md-2-mianze2" style="width: 100%;">
+									<div class="footer-widget" style="width: 100%;padding-top:8%;padding-bottom: 30px;">
+										<h4 class="widget-title">&nbsp</h4>
+										<ul class="footer-menu">
+											<li><a href="#">123231</a></li>
+											<li><a href="#">123231</a></li>
+											<li><a href="#">123231</a></li>
+											<li><a href="#">123231</a></li>
+											<li><a href="#">123231</a></li>
+											<li><a href="#">123231</a></li>
+											<li><a href="#">123231</a></li>
+										</ul>
+									</div>
+								</div>
+							</div> -->
 					</div>
 				</div>
-			</div>
-
+		
 		</footer>
 		<!-- ============================ Footer End ================================== -->
 	</div>

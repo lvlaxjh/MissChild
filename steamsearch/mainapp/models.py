@@ -1,7 +1,7 @@
 '''
 Author: your name
 Date: 2020-08-18 13:51:41
-LastEditTime: 2020-09-26 22:27:57
+LastEditTime: 2020-09-27 10:27:31
 LastEditors: Please set LastEditors
 Description: In User Settings Edit
 FilePath: /steamsearch/mainapp/models.py
@@ -13,7 +13,7 @@ from django.db import models
 class People(models.Model):
     id = models.AutoField("唯一id", primary_key=True)
     name = models.TextField("走失者-姓名", default="none")
-    sex = models.TextField("走失者-性别", default="0")#0:男，1:女，2:其他
+    sex = models.TextField("走失者-性别", default="none")#0:男，1:女，none:其他
     birthday = models.TextField("走失者-出生日期", default="none$none$none")#格式为：年-月-日
     height = models.TextField(
         "走失者-身高", default="none")
