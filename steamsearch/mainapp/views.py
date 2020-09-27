@@ -6,7 +6,7 @@ import time
 import sys
 
 import traceback
-
+import demjson
 '''
 ----------------------------------------------------------------------------------------------------------------------------------------------
 功能函数
@@ -510,30 +510,75 @@ API
 ----------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------
 '''
-
+def apidoc(request):
+    return render(request,"apidoc.html")
 
 def useApi(request, content):
     contentJson = {
-        "code": 0,
+        "code": 0,#1为正常，0为无次api，-1为报错
     }
-    # 数据库信息及网站基本信息-start
-    if content == 'basicInformation':
-        contentJson["code"] = 1
-        nowTime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        contentJson["basicInformation"] = {
-            "time": nowTime,
-            "Total": {
-                "note": "失联人员统计信息",
-                "exist": str(People.objects.all().count()),
-            },
-            "webInf": {
-                "note": "网站信息",
-                "visits": str(Statistics.objects.get(id=1).visits),
-                "search": str(Statistics.objects.get(id=1).search),
-                "upload": str(Statistics.objects.get(id=1).upload),
+    try:
+        # 数据库信息及网站基本信息-start
+        if content == 'basicIinformation':
+            contentJson["code"] = 1
+            nowTime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+            contentJson["basicinformation"] = {
+                "time": nowTime,
+                "Total": {
+                    "note": "失联人员统计信息数量",
+                    "exist": str(People.objects.all().count()),
+                },
+                "webInf": {
+                    "note": "网站信息",
+                    "visits": str(Statistics.objects.get(id=1).visits),
+                    "search": str(Statistics.objects.get(id=1).search),
+                    "upload": str(Statistics.objects.get(id=1).upload),
+                }
             }
-        }
+            return JsonResponse(contentJson, json_dumps_params={'ensure_ascii': False}, content_type="application/json,charset=utf-8")
+        # 数据库信息及网站基本信息-end
+    except Exception as e:
+        contentJson = {}
+        contentJson['code']= -1
+        contentJson['error'] = str(e)
         return JsonResponse(contentJson, json_dumps_params={'ensure_ascii': False}, content_type="application/json,charset=utf-8")
-    # 数据库信息及网站基本信息-end
-    else:
+    try:
+        # 查询记录信息-start
+        if content == 'getinformation':
+            contentJson["code"] = 1
+            if request.method == 'POST':
+                post = demjson.decode(request.body)
+                name = post["name"]
+            nowTime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+            contentJson["getinformation"] = {
+                "time": nowTime,
+                "content": [],
+            }
+            oneInfList = []
+            oneInfList.append(People.objects.filter(name=name))
+            for j in oneInfList:
+                for i in j:
+                    infDict = {
+                        "name": i.name,
+                        "sex": i.sex,
+                        "birthday": i.birthday,
+                        "height": i.weight,
+                        "weight": i.height,
+                        "timeL": i.timeL,
+                        "site": i.site,
+                        "text": i.text,
+                        "kinName": i.kinName,
+                        "kinLink": i.kinLink,
+                        "img": [],
+                    }
+                    infoImg = PeopleImg.objects.filter(onePeople=i.id)
+                    for m in infoImg:
+                        infDict["img"].append("www.jhc.cool/media/"+str(m.imgFile))
+                    contentJson["getinformation"]["content"].append(infDict)
+            return JsonResponse(contentJson, json_dumps_params={'ensure_ascii': False}, content_type="application/json,charset=utf-8")
+        # 数查询记录信息-end
+    except Exception as e:
+        contentJson = {}
+        contentJson['code'] = -1
+        contentJson['error'] = str(e)
         return JsonResponse(contentJson, json_dumps_params={'ensure_ascii': False}, content_type="application/json,charset=utf-8")
