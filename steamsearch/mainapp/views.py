@@ -314,46 +314,6 @@ def oneContent(request,ID):
 
 # '''
 # ----------------------------------------------------------------------------------------------------------------------------------------------
-# 管理员审核登陆
-# ----------------------------------------------------------------------------------------------------------------------------------------------
-# '''
-# def managerLogin(request):
-#     content = {
-#         "mess":"",
-#     }
-#     try:
-#         if request.method == 'POST':
-#             username = request.POST.get('username')
-#             userpass =request.POST.get('userpass')
-#             if len(userpass)>0 and len(username)>0:
-#                 try:
-#                     # 判断用户名和密码是否正确-start
-#                     isRight = False
-#                     oneuser = Manage.objects.filter(user=username)
-#                     if oneuser.count() > 0:
-#                         for i in oneuser:
-#                             if i.password == userpass:
-#                                 isRight = True
-#                     # 判断用户名和密码是否正确-end
-#                     if isRight:
-#                         request.session['islog'] = "1"  # 保存cookies
-#                         # return render(request, 'check.html')
-#                         return HttpResponseRedirect('check')
-#                     else:
-#                         content["mess"]="用户名或密码错误"
-#                         return render(request, 'manlogin.html',content)
-#                 except Exception as e:
-#                     return errorFunc(request, e, sys._getframe().f_lineno)
-#             else:
-#                 return render(request, 'manlogin.html',content)
-
-#     except Exception as e:
-#         return errorFunc(request, e, sys._getframe().f_lineno)
-
-#     return render(request, 'manlogin.html', content)
-
-# '''
-# ----------------------------------------------------------------------------------------------------------------------------------------------
 # 管理员审核
 # ----------------------------------------------------------------------------------------------------------------------------------------------
 # '''
@@ -582,3 +542,130 @@ def useApi(request, content):
         contentJson['code'] = -1
         contentJson['error'] = str(e)
         return JsonResponse(contentJson, json_dumps_params={'ensure_ascii': False}, content_type="application/json,charset=utf-8")
+
+
+'''
+----------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------
+论坛
+----------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------
+'''
+
+'''
+----------------------------------------------------------------------------------------------------------------------------------------------
+注册
+----------------------------------------------------------------------------------------------------------------------------------------------
+'''
+
+
+def register(request):
+    content = {
+        "mess": "",
+    }
+    try:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            userpass = request.POST.get('userpass')
+            userpass2 = request.POST.get('userpass2')
+            useremail = request.POST.get('email')
+            if len(userpass)>0 or len(userpass2)>0 or len(userpass)>0 or len(useremail)>0:
+                getuser = User.objects.filter(name=username)
+                if userpass != userpass2:
+                    content["mess"] = "两次输入密码不一致"
+                    return render(request, 'register.html', content)
+                elif getuser.count() >0:
+                    content["mess"] = "该账号已经注册，请直接登陆"
+                    return render(request, 'register.html', content)
+                else:
+                    oneuser = User.objects.create(
+                        name=username, password=userpass, email=useremail)
+                    request.session['user'] = username
+                    return redirect('bbsindex')
+            else:
+                content["mess"] = "有未填项"
+                return render(request, 'register.html', content)
+    except Exception as e:
+        return errorFunc(request, e, sys._getframe().f_lineno)
+
+    return render(request, 'register.html', content)
+
+'''
+----------------------------------------------------------------------------------------------------------------------------------------------
+登陆
+----------------------------------------------------------------------------------------------------------------------------------------------
+'''
+
+def login(request):
+    content = {
+        "mess": "",
+    }
+    try:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            userpass = request.POST.get('userpass')
+            if len(userpass) > 0 and len(username) > 0:
+                getuser = User.objects.filter(name=username)
+                if getuser.count() < 0:
+                    content["mess"] = "该用户不存在，请注册"
+                    return render(request, 'login.html', content)
+                elif getuser.first().password != userpass:
+                    content["mess"] = "密码或用户名错误"
+                    return render(request, 'login.html', content)
+                else:
+                    request.session['user'] = username
+                    return redirect('bbsindex')
+            else:
+                content["mess"] = "有未填项"
+                return render(request, 'login.html', content)
+    except Exception as e:
+        return errorFunc(request, e, sys._getframe().f_lineno)
+    return render(request, 'login.html', content)
+
+
+'''
+----------------------------------------------------------------------------------------------------------------------------------------------
+论坛主页
+----------------------------------------------------------------------------------------------------------------------------------------------
+'''
+
+def bbsindex(request):
+    content = {
+        "user": None
+    }
+    try:
+        cookielog = request.session.get('user')
+        print(cookielog)
+        if cookielog != None:
+            content["user"] = cookielog
+    except Exception as e:
+        return errorFunc(request, e, sys._getframe().f_lineno)
+    print(content)
+    return render(request,"bbsindex.html",content)
+
+def postnew(request):
+    content = {
+        "user": None
+    }
+    try:
+        cookielog = request.session.get('user')
+        print(cookielog)
+        if cookielog != None:
+            content["user"] = cookielog
+        else:
+            return redirect('login')
+    except Exception as e:
+        return errorFunc(request, e, sys._getframe().f_lineno)
+    return render(request,"postnews.html")

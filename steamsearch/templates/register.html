@@ -14,7 +14,6 @@
 <script>
 
 	function onTopClick() {
-
 		window.location.hash = "#upload";
 	}
 
@@ -41,17 +40,6 @@
 								</ul>
 							</li>
 						</ul>
-
-						<ul class="nav-menu nav-menu-social align-to-right">
-							<li class="add-listing theme-bg">
-								<button
-									style="height: 100%;width: 100%;background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;">
-									<a href="{% url 'index' %}">
-										<i class="ti-plus"></i> 上传
-									</a>
-								</button>
-							</li>
-						</ul>
 					</div>
 				</nav>
 			</div>
@@ -65,7 +53,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="tr-list-center">
-						<h2 style="font-size: 50px;">管理员登陆</h2>
+						<h2 style="font-size: 50px;">注册</h2>
 					</div>
 				</div>
 			</div>
@@ -77,31 +65,49 @@
 
 					<div class="col-lg-7 col-md-7 col-sm-12">
 						<div class="modal-body">
-							<h4 class="modal-header-title">Welcome <span>Back</span></h4>
+							<!-- <h4 class="modal-header-title">Welcome</h4> -->
 							<div class="social-login center-tr">
 							</div>
 							<div class="login-form">
 								<form method="POST">
 
 									<div class="form-group">
-										<label>User Name</label>
+										<label>用户名</label>
 										<div class="input-with-gray">
-											<input name = "username" type="text" class="form-control" placeholder="Username">
+											<input name="username" type="text" class="form-control" placeholder="用户名">
 											<i class="ti-user"></i>
 										</div>
 									</div>
 
 									<div class="form-group">
-										<label>Password</label>
+										<label>密码</label>
 										<div class="input-with-gray">
-											<input name = "userpass" type="password" class="form-control" placeholder="*******">
+											<input name="userpass" type="password" class="form-control"
+												placeholder="*******">
 											<i class="ti-unlock"></i>
 										</div>
 									</div>
+									<div class="form-group">
+										<label>重复密码</label>
+										<div class="input-with-gray">
+											<input name="userpass2" type="text" class="form-control"
+												placeholder="*******">
+											<i class="ti-unlock"></i>
+										</div>
+									</div>
+									<div class="form-group">
+										<label>邮件</label>
+										<div class="input-with-gray">
+											<input name="email" type="text" class="form-control"
+												placeholder="xxx@example.com">
+											<i class="ti-email"></i>
+										</div>
+									</div>
+									<center><a href="{% url 'login' %}" style="font-size: 13px;"><b>登陆</b></a></center>
 									<p>{{ mess }}</p>
 									<div class="form-group">
 										<button type="submit"
-											class="btn btn-primary btn-md full-width pop-login">Login</button>
+											class="btn btn-primary btn-md full-width pop-login">注册</button>
 									</div>
 
 								</form>

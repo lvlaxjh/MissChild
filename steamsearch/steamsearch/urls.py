@@ -1,7 +1,7 @@
 '''
 Author: your name
 Date: 2020-08-18 13:51:13
-LastEditTime: 2020-09-27 15:53:09
+LastEditTime: 2020-09-27 18:52:07
 LastEditors: Please set LastEditors
 Description: In User Settings Edit
 FilePath: /steamsearch/steamsearch/urls.py
@@ -22,9 +22,14 @@ urlpatterns = [
     path('content/<ID>/',
          views.oneContent, name='content'),
     # path('manager/check/',views.check, name='check'),
-    # path('manager/', views.managerLogin, name='manager'),
     path('apidoc',views.apidoc,name='apidoc'),
     path('api/<content>/', views.useApi,name='api'),
+    #论坛
+    path('login/', views.login, name='login'),
+    path('register/', views.register, name='register'),
+    path('bbs/',views.bbsindex,name='bbsindex'),
+    path('bbs/post', views.postnew, name='postnew'),
+
     # # path('api/databaseBasicInformation/', views.databaseBasicInformation,
     # #      name='databaseBasicInformation'),
     # url(r'^static/(?P<path>.*)$', static.serve,

@@ -47,7 +47,7 @@
 								<button
 									style="height: 100%;width: 100%;background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;">
 									<a href="{% url 'bbsindex' %}">
-										</i> 返回论坛
+										返回论坛
 									</a>
 								</button>
 							</li>
@@ -61,52 +61,37 @@
 		<!-- ================================================================================================================================ -->
 		<!-- ========================================================显示信息================================================================== -->
 		<!-- ================================================================================================================================ -->
-		<section class="small-page-title-banner" style="background-image:url({% static "assets/img/des-10.jpg" %});">
+		<section class="small-page-title-banner" style="background-image:url({% static "assets/img/des-9.jpg" %});">
 			<div class="container">
 				<div class="row">
 					<div class="tr-list-center">
-						<h2 style="font-size: 50px;">管理员登陆</h2>
+						<h2>发条贴子</h2>
 					</div>
 				</div>
 			</div>
 		</section>
 		<section>
 			<div class="container">
-
-				<div class="row justify-content-center">
-
-					<div class="col-lg-7 col-md-7 col-sm-12">
-						<div class="modal-body">
-							<h4 class="modal-header-title">Welcome <span>Back</span></h4>
-							<div class="social-login center-tr">
-							</div>
-							<div class="login-form">
-								<form method="POST">
-
-									<div class="form-group">
-										<label>用户名</label>
-										<div class="input-with-gray">
-											<input name = "username" type="text" class="form-control" placeholder="用户名">
-											<i class="ti-user"></i>
-										</div>
-									</div>
-
-									<div class="form-group">
-										<label>密码</label>
-										<div class="input-with-gray">
-											<input name = "userpass" type="password" class="form-control" placeholder="*******">
-											<i class="ti-unlock"></i>
-										</div>
-									</div>
-									<center><a href="{% url 'register' %}" style="font-size: 13px;"><b>注册</b></a></center>
-									<p>{{ mess }}</p>
-									<div class="form-group">
-										<button type="submit"
-											class="btn btn-primary btn-md full-width pop-login">登陆</button>
-									</div>
-
-								</form>
-							</div>
+				<div class="row">
+					<div class="col-lg-72 col-md-72">
+						<div class="contact-form">
+							<form method="POST" enctype="multipart/form-data">
+								<div class="form-group">
+									<label>标题</label>
+									<input name="title" type="text" class="form-control" placeholder="标题必须输入哦～">
+								</div>
+								<div class="form-group">
+									<label>内容</label>
+									<textarea name="content" type="text" class="form-control" style="height: 400px;"
+										placeholder="帖子具体内容"></textarea>
+								</div>
+								<div class="form-group">
+									<label>上传图片</label><br>
+									<input type="file" name="newsimg" accept="image/*" multiple="multiple" />
+								</div>
+								<button value='subInf' disabled="disabled" name="subInf" type="submit"
+									class="btn btn-primary">提交审核</button>
+							</form>
 						</div>
 					</div>
 
@@ -114,6 +99,7 @@
 
 			</div>
 		</section>
+		<section></section>
 		<!-- ================================================================================================================================ -->
 		<!-- ========================================================底栏===================================================================== -->
 		<!-- ================================================================================================================================ -->
@@ -190,7 +176,30 @@
 	<!-- ============================================================== -->
 	<!-- This page plugins -->
 	<!-- ============================================================== -->
+	<script>
+		//
+		$(function () {
+			//录入
+			var committerInformationFLAG = false;
+			var reportInfFLAG = true;
+			$("input[name='title']").blur(function () {
+				var information = $(this).val().trim();
+				if (information == "") {
+					committerInformationFLAG = false;
+				} else {
+					committerInformationFLAG = true;
+				}
+				if (committerInformationFLAG && reportInfFLAG) {
+					$("button[name='subInf']").removeAttr("disabled");
+				}
+				else {
+					$("button[name='subInf']").attr({ "disabled": "disabled" });
 
+				}
+				// console.log(committerInformationFLAG, reportInfFLAG)
+			});
+		});
+	</script>
 </body>
 
 </html>
