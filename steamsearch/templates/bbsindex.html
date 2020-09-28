@@ -47,7 +47,7 @@
 						<ul class="nav-menu nav-menu-social align-to-right">
 							<li>
 								<a href="#" data-toggle="modal" data-target="#login">
-									<span class="dn-lg" style="font-size:18px"><b><a href="{% url 'index' %}" target="_blank">寻人网</a></b></span>
+									<span class="dn-lg" style="font-size:18px"><b><a href="{% url 'index' %}" target="_blank">寻子网</a></b></span>
 								</a>
 							</li>
 							{% if user == None %}
@@ -122,22 +122,25 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
+						{% for inf in res %}
+						<a href="{% url 'bbscontent' inf.id  %}">
 						<form method="POST">
 							<div class="job-new-list">
 								<div class="vc-content" style="width: 100%;">
 									<ul class="vc-info-list">
 										<li class="list-inline-item" style="width: 100%;">
 											<div style="margin-top:15px"></div>
-											<h5 style="margin-bottom: 7px;font-size:25px;margin-bottom:3%"><b>姓名：{{ inf.name }}</b></h5>
-											<h5 style="margin-bottom: 7px;font-size:18px">性别：{{ inf.sex }}</h5>
+											<h5 style="margin-bottom: 7px;font-size:25px;margin-bottom:3%"><b>{{ inf.title }}</b></h5>
+											<h5 style="margin-bottom: 7px;font-size:18px">{{ inf.content }}</h5>
 										</li>
 									</ul>
 								</div>
 							</div>
 						</form>
+						</a>
+						{% endfor %}
 					</div>
 				</div>
-		
 			</div>
 		</section>
 		<!-- ================================================================================================================================ -->

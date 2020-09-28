@@ -86,7 +86,7 @@
 									<div class="form-group">
 										<label>用户名</label>
 										<div class="input-with-gray">
-											<input name = "username" type="text" class="form-control" placeholder="用户名">
+											<input name="username" type="text" class="form-control" placeholder="用户名">
 											<i class="ti-user"></i>
 										</div>
 									</div>
@@ -94,11 +94,13 @@
 									<div class="form-group">
 										<label>密码</label>
 										<div class="input-with-gray">
-											<input name = "userpass" type="password" class="form-control" placeholder="*******">
+											<input name="userpass" type="password" class="form-control"
+												placeholder="*******">
 											<i class="ti-unlock"></i>
 										</div>
 									</div>
-									<center><a href="{% url 'register' %}" style="font-size: 13px;"><b>注册</b></a></center>
+									<center><a href="{% url 'register' %}" style="font-size: 13px;"><b>注册</b></a>
+									</center>
 									<p>{{ mess }}</p>
 									<div class="form-group">
 										<button type="submit"

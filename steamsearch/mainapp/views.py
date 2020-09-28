@@ -20,7 +20,7 @@ def errorFunc(request, e, erLine):
     print("errorContent:    "+str(e))
     print("errorLine:   "+str(erLine))
     print("********************************500-Error-end********************************")
-    return render(request, '500.html', {"error": e,"erLine":erLine})
+    return render(request, '500.html', {"error": e, "erLine": erLine})
 
 
 '''
@@ -28,6 +28,7 @@ def errorFunc(request, e, erLine):
 主界面
 ----------------------------------------------------------------------------------------------------------------------------------------------
 '''
+
 
 def index(request):
     content = {
@@ -62,7 +63,7 @@ def index(request):
                 stat.save()
                 # 站内统计-end
             except Exception as e:
-                return errorFunc(request, e, sys._getframe().f_lineno)  
+                return errorFunc(request, e, sys._getframe().f_lineno)
             try:
                 # 搜索-start
                 searchContent = request.POST.get('searchContent')
@@ -131,16 +132,16 @@ def searchResults(request, searchContent):
     # 搜索名字-start
     try:
         try:
-            #查看详细内容-start
+            # 查看详细内容-start
             if request.method == 'POST':
                 contentId = request.POST.get('contentBtn')
                 return redirect(reverse('content', kwargs={'ID': str(contentId)}))
-            #查看详细内容-end
+            # 查看详细内容-end
         except Exception as e:
             return errorFunc(request, e, sys._getframe().f_lineno)
-        #显示内容-start
-        oneInfList = []#读取数据库列表
-        resList = []#返回前端数据列表
+        # 显示内容-start
+        oneInfList = []  # 读取数据库列表
+        resList = []  # 返回前端数据列表
         oneInfList.append(People.objects.filter(name=searchContent))
         for j in oneInfList:
             for i in j:
@@ -159,27 +160,27 @@ def searchResults(request, searchContent):
                     "timeLMin": '',
                     "site": i.site,
                     "text": i.text,
-                    "kinName":i.kinName,
-                    "kinLink":i.kinLink,
-                    "img":[],
+                    "kinName": i.kinName,
+                    "kinLink": i.kinLink,
+                    "img": [],
                     "id": i.id,
                 }
                 for key, value in infDict.items():
-                    if value=="none":
+                    if value == "none":
                         infDict[key] = '未知'
                 infoImg = PeopleImg.objects.filter(onePeople=i.id)
-                if len(infoImg)>0:
+                if len(infoImg) > 0:
                     infDict["img"].append(infoImg[0].imgFile)
-                #处理性别-start
+                # 处理性别-start
                 if i.sex == "nan":
-                    infDict['sex']="男"
+                    infDict['sex'] = "男"
                 elif i.sex == "nv":
-                    infDict['sex']="女"
+                    infDict['sex'] = "女"
                 else:
-                    infDict['sex']="未知/其他"
-                #处理性别-end
-                #处理生日-start
-                birList =  str(i.birthday).split('$')
+                    infDict['sex'] = "未知/其他"
+                # 处理性别-end
+                # 处理生日-start
+                birList = str(i.birthday).split('$')
                 if birList[0] != "none":
                     infDict['birthdayY'] = birList[0]
                 else:
@@ -192,8 +193,8 @@ def searchResults(request, searchContent):
                     infDict['birthdayD'] = birList[2]
                 else:
                     infDict['birthdayD'] = '未知'
-                #处理生日-end
-                #处理走失日期-start
+                # 处理生日-end
+                # 处理走失日期-start
                 missT = str(i.timeL).split('$')
                 if missT[0] != 'none':
                     infDict['timeLY'] = missT[0]
@@ -215,15 +216,16 @@ def searchResults(request, searchContent):
                     infDict['timeLMin'] = missT[4]
                 else:
                     infDict['timeLMin'] = '未知'
-                #处理走失日期-end
+                # 处理走失日期-end
                 resList.append(infDict)
         content['res'] = resList
-        #显示内容-end
+        # 显示内容-end
     except Exception as e:
         return errorFunc(request, e, sys._getframe().f_lineno)
 
     # 搜索名字-end
     return render(request, 'res.html', content)
+
 
 '''
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -232,9 +234,9 @@ def searchResults(request, searchContent):
 '''
 
 
-def oneContent(request,ID):
+def oneContent(request, ID):
     try:
-        i = People.objects.filter(id = ID).first()
+        i = People.objects.filter(id=ID).first()
         infDict = {
             "name": i.name,
             "sex": '',
@@ -261,15 +263,15 @@ def oneContent(request,ID):
         infoImg = PeopleImg.objects.filter(onePeople=i.id)
         for j in infoImg:
             infDict["img"].append(j.imgFile)
-        #处理性别-start
+        # 处理性别-start
         if i.sex == "nan":
             infDict['sex'] = "男"
         elif i.sex == "nv":
             infDict['sex'] = "女"
         else:
             infDict['sex'] = "未知/其他"
-        #处理性别-end
-        #处理生日-start
+        # 处理性别-end
+        # 处理生日-start
         birList = str(i.birthday).split('$')
         if birList[0] != "none":
             infDict['birthdayY'] = birList[0]
@@ -283,8 +285,8 @@ def oneContent(request,ID):
             infDict['birthdayD'] = birList[2]
         else:
             infDict['birthdayD'] = '未知'
-        #处理生日-end
-        #处理走失日期-start
+        # 处理生日-end
+        # 处理走失日期-start
         missT = str(i.timeL).split('$')
         if missT[0] != 'none':
             infDict['timeLY'] = missT[0]
@@ -306,7 +308,7 @@ def oneContent(request,ID):
             infDict['timeLMin'] = missT[4]
         else:
             infDict['timeLMin'] = '未知'
-        #处理走失日期-end
+        # 处理走失日期-end
     except Exception as e:
         return errorFunc(request, e, sys._getframe().f_lineno)
     return render(request, 'content.html', infDict)
@@ -436,7 +438,6 @@ def oneContent(request,ID):
 #         return HttpResponse("无效的管理用户名或密码")
 
 
-
 '''
 ----------------------------------------------------------------------------------------------------------------------------------------------
 404
@@ -459,8 +460,6 @@ def page_error(request, exception):
     return render(request, '500.html', {"error": "normalError", "erLine": 0})
 
 
-
-
 '''
 ----------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -470,12 +469,15 @@ API
 ----------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------
 '''
+
+
 def apidoc(request):
-    return render(request,"apidoc.html")
+    return render(request, "apidoc.html")
+
 
 def useApi(request, content):
     contentJson = {
-        "code": 0,#1为正常，0为无次api，-1为报错
+        "code": 0,  # 1为正常，0为无次api，-1为报错
     }
     try:
         # 数据库信息及网站基本信息-start
@@ -499,7 +501,7 @@ def useApi(request, content):
         # 数据库信息及网站基本信息-end
     except Exception as e:
         contentJson = {}
-        contentJson['code']= -1
+        contentJson['code'] = -1
         contentJson['error'] = str(e)
         return JsonResponse(contentJson, json_dumps_params={'ensure_ascii': False}, content_type="application/json,charset=utf-8")
     try:
@@ -533,7 +535,8 @@ def useApi(request, content):
                     }
                     infoImg = PeopleImg.objects.filter(onePeople=i.id)
                     for m in infoImg:
-                        infDict["img"].append("www.jhc.cool/media/"+str(m.imgFile))
+                        infDict["img"].append(
+                            "www.jhc.cool/media/"+str(m.imgFile))
                     contentJson["getinformation"]["content"].append(infDict)
             return JsonResponse(contentJson, json_dumps_params={'ensure_ascii': False}, content_type="application/json,charset=utf-8")
         # 数查询记录信息-end
@@ -581,17 +584,18 @@ def register(request):
             userpass = request.POST.get('userpass')
             userpass2 = request.POST.get('userpass2')
             useremail = request.POST.get('email')
-            if len(userpass)>0 or len(userpass2)>0 or len(userpass)>0 or len(useremail)>0:
+            if len(userpass) > 0 or len(userpass2) > 0 or len(userpass) > 0 or len(useremail) > 0:
                 getuser = User.objects.filter(name=username)
                 if userpass != userpass2:
                     content["mess"] = "两次输入密码不一致"
                     return render(request, 'register.html', content)
-                elif getuser.count() >0:
+                elif getuser.count() > 0:
                     content["mess"] = "该账号已经注册，请直接登陆"
                     return render(request, 'register.html', content)
                 else:
                     oneuser = User.objects.create(
                         name=username, password=userpass, email=useremail)
+                    oneuser.save()
                     request.session['user'] = username
                     return redirect('bbsindex')
             else:
@@ -602,11 +606,13 @@ def register(request):
 
     return render(request, 'register.html', content)
 
+
 '''
 ----------------------------------------------------------------------------------------------------------------------------------------------
 登陆
 ----------------------------------------------------------------------------------------------------------------------------------------------
 '''
+
 
 def login(request):
     content = {
@@ -641,19 +647,49 @@ def login(request):
 ----------------------------------------------------------------------------------------------------------------------------------------------
 '''
 
+
 def bbsindex(request):
     content = {
-        "user": None
+        "user": None,
+        "res": []
     }
     try:
         cookielog = request.session.get('user')
         print(cookielog)
         if cookielog != None:
             content["user"] = cookielog
+        # 显示内容-start
+        getNews = News.objects.all()
+        flag = 0
+        for i in getNews:
+            title = i.title
+            contentLite = i.content
+            if len(contentLite) > 80:
+                contentLite = contentLite[:79]+"..."
+            else:
+                contentLite = contentLite
+            dicts = {
+                "title": i.title,
+                "content": contentLite,
+                "id": i.id,
+            }
+            content["res"].append(dicts)
+            flag += 1
+            if flag > 15:
+                flag = 0
+                break
+        # 显示内容-end
     except Exception as e:
         return errorFunc(request, e, sys._getframe().f_lineno)
-    print(content)
-    return render(request,"bbsindex.html",content)
+    return render(request, "bbsindex.html", content)
+
+
+'''
+----------------------------------------------------------------------------------------------------------------------------------------------
+发帖
+----------------------------------------------------------------------------------------------------------------------------------------------
+'''
+
 
 def postnew(request):
     content = {
@@ -664,8 +700,45 @@ def postnew(request):
         print(cookielog)
         if cookielog != None:
             content["user"] = cookielog
+            if request.method == 'POST':
+                thisuser = User.objects.filter(name=cookielog).first()
+                title = request.POST.get('title')
+                contents = request.POST.get('content')
+                oneNews = News.objects.create(
+                    userid=thisuser, title=title, content=contents)
+                for i in request.FILES.getlist("newsimg"):
+                    checkImg = newsImg.objects.create(
+                        oneNews=oneNews, imgFile=i)  # 存储上传图片
+                    checkImg.save()
+                oneNews.save()
+                return redirect('bbsindex')
         else:
             return redirect('login')
     except Exception as e:
         return errorFunc(request, e, sys._getframe().f_lineno)
-    return render(request,"postnews.html")
+    return render(request, "postnews.html")
+
+
+'''
+----------------------------------------------------------------------------------------------------------------------------------------------
+发帖
+----------------------------------------------------------------------------------------------------------------------------------------------
+'''
+
+
+def bbscontent(request, content):
+    contents = {}
+    try:
+        pass
+        # 显示内容-start
+        oneNews = News.objects.filter(id=content).first()
+        contents["title"] = oneNews.title
+        contents["content"] = oneNews.content
+        contents["img"] = []
+        infoImg = newsImg.objects.filter(oneNews=content)
+        for i in infoImg:
+            contents["img"].append(i.imgFile)
+        # 显示内容-end
+    except Exception as e:
+        return errorFunc(request, e, sys._getframe().f_lineno)
+    return render(request, "bbscontent.html", contents)

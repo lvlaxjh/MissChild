@@ -46,8 +46,8 @@
 							<li class="add-listing theme-bg">
 								<button
 									style="height: 100%;width: 100%;background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;">
-									<a href="{% url 'bbsindex' %}">
-										返回论坛
+									<a href="{% url 'index' %}">
+										<i class="ti-plus"></i> 上传
 									</a>
 								</button>
 							</li>
@@ -61,44 +61,25 @@
 		<!-- ================================================================================================================================ -->
 		<!-- ========================================================显示信息================================================================== -->
 		<!-- ================================================================================================================================ -->
-		<section class="small-page-title-banner" style="background-image:url({% static "assets/img/des-9.jpg" %});">
+		<section class="small-page-title-banner" style="background-image:url({% static "assets/img/des-10.jpg" %});">
 			<div class="container">
 				<div class="row">
 					<div class="tr-list-center">
-						<h2>发条贴子</h2>
+						<h2 style="font-size: 50px;">{{ title }}</h2>
 					</div>
 				</div>
 			</div>
 		</section>
-		<section>
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-72 col-md-72">
-						<div class="contact-form">
-							<form method="POST" enctype="multipart/form-data">
-								<div class="form-group">
-									<label>标题</label>
-									<input name="title" type="text" class="form-control" placeholder="标题必须输入哦～">
-								</div>
-								<div class="form-group">
-									<label>内容</label>
-									<textarea name="content" type="text" class="form-control" style="height: 400px;"
-										placeholder="帖子具体内容"></textarea>
-								</div>
-								<div class="form-group">
-									<label>上传图片</label><br>
-									<input type="file" name="newsimg" accept="image/*" multiple="multiple" />
-								</div>
-								<button value='subInf' disabled="disabled" name="subInf" type="submit"
-									class="btn btn-primary">发帖</button>
-							</form>
-						</div>
-					</div>
-
-				</div>
-
-			</div>
-		</section>
+		<div style="margin-top:6%"></div>
+		<center>
+			<pre style="margin-bottom: 30px;font-size:23px;WORD-BREAK:break-all;width: 60%;">{{ content }}</pre>
+			{% for i in img %}
+			<center><img src="/media/{{ i }}" style="width: auto;height: auto;max-width: 800px;max-height: 500px;">
+			</center>
+			{% endfor %}
+		</center>
+		<div class="clearfix"></div>
+		<section></section>
 		<section></section>
 		<!-- ================================================================================================================================ -->
 		<!-- ========================================================底栏===================================================================== -->
@@ -114,6 +95,7 @@
 								<div class="footer-add">
 									<h4 class="widget-title">开发者</h4>
 									<p><a href="https://space.bilibili.com/175397396" target="_blank">金昊宸</a></p>
+									<!-- <p style='font-size:15'>©2020 dota2饰品吧 版权所有</p> -->
 								</div>
 
 							</div>
@@ -175,30 +157,7 @@
 	<!-- ============================================================== -->
 	<!-- This page plugins -->
 	<!-- ============================================================== -->
-	<script>
-		//
-		$(function () {
-			//录入
-			var committerInformationFLAG = false;
-			var reportInfFLAG = true;
-			$("input[name='title']").blur(function () {
-				var information = $(this).val().trim();
-				if (information == "") {
-					committerInformationFLAG = false;
-				} else {
-					committerInformationFLAG = true;
-				}
-				if (committerInformationFLAG && reportInfFLAG) {
-					$("button[name='subInf']").removeAttr("disabled");
-				}
-				else {
-					$("button[name='subInf']").attr({ "disabled": "disabled" });
 
-				}
-				// console.log(committerInformationFLAG, reportInfFLAG)
-			});
-		});
-	</script>
 </body>
 
 </html>
