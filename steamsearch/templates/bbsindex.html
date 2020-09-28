@@ -47,7 +47,7 @@
 						<ul class="nav-menu nav-menu-social align-to-right">
 							<li>
 								<a href="#" data-toggle="modal" data-target="#login">
-									<span class="dn-lg" style="font-size:18px"><b><a href="{% url 'index' %}" target="_blank">寻子网</a></b></span>
+									<span class="dn-lg" style="font-size:18px"><a href="{% url 'index' %}" target="_blank">寻子网</a></span>
 								</a>
 							</li>
 							{% if user == None %}
@@ -58,7 +58,7 @@
 							</li>
 							{% else %}
 							<li>
-								<a href="#">
+								<a href="{% url 'personal' %}">
 									<i class="ti-user mr-1"></i><span class="dn-lg">{{ user }}</span>
 								</a>
 							</li>

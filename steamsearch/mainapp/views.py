@@ -314,130 +314,6 @@ def oneContent(request, ID):
     return render(request, 'content.html', infDict)
 
 
-# '''
-# ----------------------------------------------------------------------------------------------------------------------------------------------
-# 管理员审核
-# ----------------------------------------------------------------------------------------------------------------------------------------------
-# '''
-# def check(request):
-#     content={}
-#     try:
-#         cookielog = request.session.get('islog')
-#         if cookielog == "1":#成功进入
-#             pass
-#         elif cookielog != "1":
-#             return redirect("manager")
-#     except Exception as e:
-#         return errorFunc(request, e, sys._getframe().f_lineno)
-#     return render(request, 'check.html',content)
-
-# def check(request, u, p):
-#     try:
-#         content = {}
-#         checkName = request.GET.get('name')
-#         checkPassword = request.GET.get('password')
-#         # 判断用户名和密码是否正确-start
-#         isRight = False
-#         oneuser = Manage.objects.filter(user=u)
-#         if oneuser.count() > 0:
-#             for i in oneuser:
-#                 if i.password == p:
-#                     isRight = True
-#         # 判断用户名和密码是否正确-end
-#     except Exception as e:
-#         return errorFunc(request, e, sys._getframe().f_lineno)
-#     if isRight:
-#         if(request.method == "POST"):
-#             try:
-#                 inputBtn = request.POST.get("inputBtn")
-#                 delBtn = request.POST.get("delBtn")
-#                 # 录入信息-start
-#                 if inputBtn != None and delBtn == None:
-#                     requestDic = {
-#                         "committerInformation": request.POST.get('committerInformation'),
-#                         "committerUrl": request.POST.get('committerUrl'),
-#                         #
-#                         "reportQq": request.POST.get('reportQq'),
-#                         "reportVx": request.POST.get('reportVx'),
-#                         "reportSteam": request.POST.get('reportSteam'),
-#                         "reportAliPay": request.POST.get('reportAliPay'),
-#                         "reportMaxId": request.POST.get('reportMaxId'),
-#                         "reportHeiBox": request.POST.get('reportHeiBox'),
-#                         "reportTieBa": request.POST.get('reportTieBa'),
-#                         "examineFlag": '1',  # 更新数据库状态，表示已经通过审核
-#                     }
-#                     for key, value in requestDic.items():  # 判断录入数据，若为空则在数据库中用none占位
-#                         if value == '':
-#                             requestDic[key] = 'none'
-#                     oneInf = ToExamine.objects.filter(
-#                         id=inputBtn).update(**requestDic)  # 存入数据库
-#                     # 审核完成删除审核使用图片-start
-#                     delInfoImg = ExamineImg.objects.filter(
-#                         examine=inputBtn)
-#                     if delInfoImg.count() > 0:
-#                         delInfoImg.delete()
-#                     # 审核完成删除审核使用图片-end
-#                     # 保存审核结果至结果表-start
-#                     saveDic = requestDic
-#                     del saveDic['committerInformation']
-#                     del saveDic['examineFlag']
-#                     oneInfsave = Total.objects.create(**saveDic)
-#                     oneInfsave.save()
-#                     # 保存审核结果至结果表-end
-#                     return HttpResponseRedirect('/check'+'/'+u+'/'+p+'/')
-#                 # 录入信息-end
-#                 # 删除信息-start
-#                 elif inputBtn == None and delBtn != None:
-#                     oneInf = ToExamine.objects.get(id=delBtn)
-#                     # 保存审核结果至结果表-start
-#                     delInfoImg = ExamineImg.objects.filter(examine=delBtn)
-#                     if delInfoImg.count() > 0:
-#                         delInfoImg.delete()
-#                     # 保存审核结果至结果表-end
-#                     oneInf.examineFlag = '2'  # 更新数据库状态，表示已经删除
-#                     oneInf.save()
-#                 # 删除信息-end
-#             except Exception as e:
-#                 return errorFunc(request, e, sys._getframe().f_lineno)
-#         try:
-#             oneInfo = ToExamine.objects
-#             infList = []
-#         except Exception as e:
-#             return errorFunc(request, e, sys._getframe().f_lineno)
-#         # 读取数据库数据显示html-start
-#         if(oneInfo.filter(examineFlag='0')):
-#             try:
-#                 for i in oneInfo.filter(examineFlag='0'):
-#                     infDict = {
-#                         "committerInformation": i.committerInformation,
-#                         "committerUrl": i.committerUrl,
-#                         #
-#                         "reportQq": i.reportQq,
-#                         "reportVx": i.reportVx,
-#                         "reportSteam": i.reportSteam,
-#                         "reportAliPay": i.reportAliPay,
-#                         "reportMaxId": i.reportMaxId,
-#                         "reportHeiBox": i.reportHeiBox,
-#                         "reportTieBa": i.reportTieBa,
-#                         "id": i.id,
-#                         "img": []
-#                     }
-#                     infoImg = ExamineImg.objects.filter(examine=i.id)
-#                     for i in infoImg:
-#                         infDict["img"].append(i.imgFile)
-#                     infList.append(infDict)
-#             except Exception as e:
-#                 return errorFunc(request, e, sys._getframe().f_lineno)
-#         try:
-#             content['needCheck'] = infList
-#             return render(request, 'check.html', content)
-#         except Exception as e:
-#             return errorFunc(request, e, sys._getframe().f_lineno)
-#         # 读取数据库数据显示html-end
-#     else:
-#         return HttpResponse("无效的管理用户名或密码")
-
-
 '''
 ----------------------------------------------------------------------------------------------------------------------------------------------
 404
@@ -551,9 +427,7 @@ def useApi(request, content):
 ----------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -643,6 +517,52 @@ def login(request):
 
 '''
 ----------------------------------------------------------------------------------------------------------------------------------------------
+忘记密码
+----------------------------------------------------------------------------------------------------------------------------------------------
+'''
+
+
+def forget(request):
+    content = {
+        "mess": "",
+    }
+    try:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            userpass = request.POST.get('userpass')
+            userpass2 = request.POST.get('userpass2')
+            useremail = request.POST.get('email')
+            if len(userpass) > 0 or len(userpass2) > 0 or len(userpass) > 0 or len(useremail) > 0:
+                getuser = User.objects.filter(name=username)
+                if getuser.count() > 0:
+                    getuser = getuser.first()
+                    if userpass != userpass2:
+                        content["mess"] = "两次输入密码不一致！"
+                        return render(request, 'forget.html', content)
+                    elif useremail != getuser.email:
+                        content["mess"] = "与注册时邮箱不同！"
+                        return render(request, 'forget.html', content)
+                    else:
+                        oneuser = User.objects.get(
+                            name=username)
+                        oneuser.password = userpass
+                        oneuser.save()
+                        request.session['user'] = username
+                        return redirect('bbsindex')
+                        # return redirect('forget')
+                else:
+                    content["mess"] = "该用户不存在"
+                return render(request, 'forget.html', content)
+            else:
+                content["mess"] = "有未填项"
+                return render(request, 'forget.html', content)
+    except Exception as e:
+        return errorFunc(request, e, sys._getframe().f_lineno)
+    return render(request, 'forget.html', content)
+
+
+'''
+----------------------------------------------------------------------------------------------------------------------------------------------
 论坛主页
 ----------------------------------------------------------------------------------------------------------------------------------------------
 '''
@@ -661,6 +581,7 @@ def bbsindex(request):
         # 显示内容-start
         getNews = News.objects.all()
         flag = 0
+        getNews = reversed(getNews)
         for i in getNews:
             title = i.title
             contentLite = i.content
@@ -721,15 +642,50 @@ def postnew(request):
 
 '''
 ----------------------------------------------------------------------------------------------------------------------------------------------
-发帖
+帖子内容
 ----------------------------------------------------------------------------------------------------------------------------------------------
 '''
 
 
 def bbscontent(request, content):
-    contents = {}
+    contents = {
+        "user": None,
+        "comm": []
+    }
     try:
-        pass
+        # 评论-start
+        cookielog = request.session.get('user')
+        if cookielog != None:  # 已经登陆
+            contents["user"] = cookielog
+            if request.method == 'POST':
+                delBtn = request.POST.get('contentBtn')
+                if delBtn != None:
+                    delComm = Comment.objects.get(id=delBtn).delete()
+            # 发送评论-start
+            if request.method == 'POST':
+                comms = request.POST.get('comment')
+                if comms != None:
+                    if len(comms) > 0:
+                        oneUser1 = User.objects.filter(name=cookielog).first()
+                        thiscomm = News.objects.filter(id=content).first()
+                        getoneComm = Comment.objects.create(
+                            userid=oneUser1, newLink=thiscomm, content=comms)
+                        getoneComm.save()
+            # 发送评论-end
+            # 显示评论-start
+            oneComm = Comment.objects.filter(newLink=content)
+            for i in oneComm:
+                oneUser = User.objects.filter(name=i.userid.name).first()
+                commDict = {
+                    "content": i.content,
+                    "username": i.userid.name,
+                    "id": i.id,
+                }
+                contents["comm"].append(commDict)
+            # 显示评论-end
+        else:
+            contents["user"] = None
+        # 评论-end
         # 显示内容-start
         oneNews = News.objects.filter(id=content).first()
         contents["title"] = oneNews.title
@@ -739,6 +695,58 @@ def bbscontent(request, content):
         for i in infoImg:
             contents["img"].append(i.imgFile)
         # 显示内容-end
+
     except Exception as e:
         return errorFunc(request, e, sys._getframe().f_lineno)
+    # print(contents)
     return render(request, "bbscontent.html", contents)
+
+
+'''
+----------------------------------------------------------------------------------------------------------------------------------------------
+个人界面
+----------------------------------------------------------------------------------------------------------------------------------------------
+'''
+
+
+def personal(request):
+    content = {
+        "user": "-1",
+        "res": [],
+    }
+    try:
+        cookielog = request.session.get('user')
+        if cookielog != None:
+            content = {
+                "user": cookielog,
+                "res": [],
+            }
+            # print(cookielog)
+            if request.method == 'POST':
+                delBtn = request.POST.get('contentBtn')
+                if delBtn != None:
+                    getNew = News.objects.get(id=delBtn).delete()
+            # 显示内容-start
+            myUser = User.objects.filter(name=cookielog).first()
+            getNews = News.objects.filter(userid=myUser)
+            flag = 0
+            getNews = reversed(getNews)
+            for i in getNews:
+                title = i.title
+                contentLite = i.content
+                if len(contentLite) > 80:
+                    contentLite = contentLite[:79]+"..."
+                else:
+                    contentLite = contentLite
+                dicts = {
+                    "title": i.title,
+                    "content": contentLite,
+                    "id": i.id,
+                }
+                content["res"].append(dicts)
+        else:
+            return redirect("login")
+    except Exception as e:
+        return errorFunc(request, e, sys._getframe().f_lineno)
+    # 显示内容-end
+    return render(request, "personal.html", content)

@@ -46,8 +46,8 @@
 							<li class="add-listing theme-bg">
 								<button
 									style="height: 100%;width: 100%;background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;">
-									<a href="{% url 'bbsindex' %}">
-										</i> 返回论坛
+									<a href="{% url 'index' %}">
+										<i class="ti-plus"></i> 上传
 									</a>
 								</button>
 							</li>
@@ -65,58 +65,47 @@
 			<div class="container">
 				<div class="row">
 					<div class="tr-list-center">
-						<h2 style="font-size: 50px;">管理员登陆</h2>
+						<h2 style="font-size: 50px;">{{ user }}</h2>
 					</div>
 				</div>
 			</div>
 		</section>
+		<!-- ================================================================================================================================ -->
+		<!-- 内容 -->
+		<!-- ================================================================================================================================ -->
 		<section>
 			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<center>
+							<h4 style="font-size: 30px;margin-bottom: 6%;">我的贴子</h4>
 
-				<div class="row justify-content-center">
-
-					<div class="col-lg-7 col-md-7 col-sm-12">
-						<div class="modal-body">
-							<h4 class="modal-header-title">Welcome <span>Back</span></h4>
-							<div class="social-login center-tr">
-							</div>
-							<div class="login-form">
-								<form method="POST">
-
-									<div class="form-group">
-										<label>用户名</label>
-										<div class="input-with-gray">
-											<input name="username" type="text" class="form-control" placeholder="用户名">
-											<i class="ti-user"></i>
-										</div>
+						</center>
+						{% for inf in res %}
+						<a href="{% url 'bbscontent' inf.id  %}">
+							<form method="POST">
+								<div class="job-new-list">
+									<div class="vc-content" style="width: 100%;">
+										<ul class="vc-info-list">
+											<li class="list-inline-item" style="width: 100%;">
+												<div style="margin-top:15px"></div>
+												<h5 style="margin-bottom: 7px;font-size:25px;margin-bottom:3%">
+													<b>{{ inf.title }}</b></h5>
+												<h5 style="margin-bottom: 7px;font-size:18px">{{ inf.content }}</h5>
+												<button name="contentBtn" type="submit" value="{{ inf.id }}"
+													style="border:none;background-color: #ff6767;width:5%;height:30px;margin-top:10px">删除</button>
+											</li>
+										</ul>
 									</div>
-
-									<div class="form-group">
-										<label>密码</label>
-										<div class="input-with-gray">
-											<input name="userpass" type="password" class="form-control"
-												placeholder="*******">
-											<i class="ti-unlock"></i>
-										</div>
-									</div>
-									<center><a href="{% url 'register' %}" style="font-size: 13px;"><b>注册</b></a>
-										<center><a href="{% url 'register' %}" style="font-size: 13px;color:rgb(236, 124, 112)"><b>忘记密码</b></a>
-									</center>
-									<p>{{ mess }}</p>
-									<div class="form-group">
-										<button type="submit"
-											class="btn btn-primary btn-md full-width pop-login">登陆</button>
-									</div>
-
-								</form>
-							</div>
-						</div>
+								</div>
+							</form>
+						</a>
+						{% endfor %}
 					</div>
-
 				</div>
-
 			</div>
 		</section>
+		<section></section>
 		<!-- ================================================================================================================================ -->
 		<!-- ========================================================底栏===================================================================== -->
 		<!-- ================================================================================================================================ -->
@@ -131,6 +120,7 @@
 								<div class="footer-add">
 									<h4 class="widget-title">开发者</h4>
 									<p><a href="https://space.bilibili.com/175397396" target="_blank">金昊宸</a></p>
+									<!-- <p style='font-size:15'>©2020 dota2饰品吧 版权所有</p> -->
 								</div>
 
 							</div>

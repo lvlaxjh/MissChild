@@ -1,7 +1,7 @@
 '''
 Author: your name
 Date: 2020-08-18 13:51:41
-LastEditTime: 2020-09-27 18:04:09
+LastEditTime: 2020-09-28 23:52:35
 LastEditors: Please set LastEditors
 Description: In User Settings Edit
 FilePath: /steamsearch/mainapp/admin.py
@@ -15,3 +15,4 @@ admin.site.register(Statistics)
 admin.site.register(User)
 admin.site.register(News)
 admin.site.register(Comment)
+admin.site.register(newsImg)

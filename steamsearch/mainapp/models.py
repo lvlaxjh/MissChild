@@ -1,7 +1,7 @@
 '''
 Author: your name
 Date: 2020-08-18 13:51:41
-LastEditTime: 2020-09-28 20:12:19
+LastEditTime: 2020-09-28 22:58:42
 LastEditors: Please set LastEditors
 Description: In User Settings Edit
 FilePath: /steamsearch/mainapp/models.py
@@ -51,7 +51,7 @@ class Statistics(models.Model):
 class User(models.Model):
     id = models.AutoField("唯一id", primary_key=True)
     name = models.TextField("账号", default="none")
-    email = models.TextField("账号", default="none")
+    email = models.TextField("邮箱", default="none")
     password = models.TextField("密码", default="none")
 
 
