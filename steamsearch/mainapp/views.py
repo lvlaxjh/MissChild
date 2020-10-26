@@ -498,7 +498,7 @@ def login(request):
             userpass = request.POST.get('userpass')
             if len(userpass) > 0 and len(username) > 0:
                 getuser = User.objects.filter(name=username)
-                if getuser.count() < 0:
+                if getuser.count() <= 0:
                     content["mess"] = "该用户不存在，请注册"
                     return render(request, 'login.html', content)
                 elif getuser.first().password != userpass:
@@ -571,14 +571,51 @@ def forget(request):
 def bbsindex(request):
     content = {
         "user": None,
-        "res": []
+        "res": [],
+        'visits': 0,
+        'search': 0,
+        'allrecord': 0,
+        'upload': 0,
     }
     try:
+        try:
+            # 站内统计-start
+            content['allrecord'] = News.objects.all().count()
+            stat = Statistics2.objects.get(id=1)
+            content['visits'] = stat.visits
+            content['search'] = stat.search
+            content['upload'] = Comment.objects.all().count()
+            stat.visits += 1
+            stat.save()
+            # 站内统计-end
+        except Exception as e:
+            return errorFunc(request, e, sys._getframe().f_lineno)
         cookielog = request.session.get('user')
-        print(cookielog)
         if cookielog != None:
             content["user"] = cookielog
         # 显示内容-start
+        if request.method == 'POST':
+            search = request.POST.get('searchButton')
+            searchContent = request.POST.get('searchContent')
+            if search != None:
+                try:
+                    # 站内统计-start
+                    content['allrecord'] = News.objects.all().count()
+                    stat = Statistics2.objects.get(id=1)
+                    content['visits'] = stat.visits
+                    content['search'] = stat.search + 1
+                    content['upload'] = Comment.objects.all().count()
+                    stat.search += 1
+                    stat.save()
+                    # 站内统计-end
+                except Exception as e:
+                    return errorFunc(request, e, sys._getframe().f_lineno)
+                if len(searchContent) > 0:
+                    return redirect(reverse('bbsres', kwargs={'content': str(searchContent)}))
+                else:
+                    return redirect("bbsindex")
+            else:
+                return redirect("bbsindex")
         getNews = News.objects.all()
         flag = 0
         getNews = reversed(getNews)
@@ -618,7 +655,6 @@ def postnew(request):
     }
     try:
         cookielog = request.session.get('user')
-        print(cookielog)
         if cookielog != None:
             content["user"] = cookielog
             if request.method == 'POST':
@@ -672,19 +708,20 @@ def bbscontent(request, content):
                             userid=oneUser1, newLink=thiscomm, content=comms)
                         getoneComm.save()
             # 发送评论-end
-            # 显示评论-start
-            oneComm = Comment.objects.filter(newLink=content)
-            for i in oneComm:
-                oneUser = User.objects.filter(name=i.userid.name).first()
-                commDict = {
-                    "content": i.content,
-                    "username": i.userid.name,
-                    "id": i.id,
-                }
-                contents["comm"].append(commDict)
-            # 显示评论-end
         else:
             contents["user"] = None
+        # 显示评论-start
+        oneComm = Comment.objects.filter(newLink=content)
+        for i in oneComm:
+            oneUser = User.objects.filter(name=i.userid.name).first()
+            commDict = {
+                "content": i.content,
+                "username": i.userid.name,
+                "id": i.id,
+            }
+            contents["comm"].append(commDict)
+        # 显示评论-end
+
         # 评论-end
         # 显示内容-start
         oneNews = News.objects.filter(id=content).first()
@@ -698,7 +735,6 @@ def bbscontent(request, content):
 
     except Exception as e:
         return errorFunc(request, e, sys._getframe().f_lineno)
-    # print(contents)
     return render(request, "bbscontent.html", contents)
 
 
@@ -721,9 +757,12 @@ def personal(request):
                 "user": cookielog,
                 "res": [],
             }
-            # print(cookielog)
             if request.method == 'POST':
                 delBtn = request.POST.get('contentBtn')
+                escBtn = request.POST.get('escBtn')
+                if escBtn != None:
+                    request.session['user'] = None
+                    return redirect("bbsindex")
                 if delBtn != None:
                     getNew = News.objects.get(id=delBtn).delete()
             # 显示内容-start
@@ -750,3 +789,28 @@ def personal(request):
         return errorFunc(request, e, sys._getframe().f_lineno)
     # 显示内容-end
     return render(request, "personal.html", content)
+
+
+def bbsres(request, content):
+    contents = {
+        "res": [],
+    }
+    try:
+        allNews = News.objects.all()
+        for i in allNews:
+            if content in i.title:
+                title = i.title
+                contentLite = i.content
+                if len(contentLite) > 80:
+                    contentLite = contentLite[:79]+"..."
+                else:
+                    contentLite = contentLite
+                dicts = {
+                    "title": i.title,
+                    "content": contentLite,
+                    "id": i.id,
+                }
+                contents["res"].append(dicts)
+    except Exception as e:
+            return errorFunc(request, e, sys._getframe().f_lineno)
+    return render(request, "bbsres.html", contents)

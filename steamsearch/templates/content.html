@@ -36,13 +36,25 @@
 						<ul class="nav-menu">
 							<li class="active"><a href="#">索引<span class="submenu-indicator"></span></a>
 								<ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
-									<li><a href="{% url 'index' %}" class="active">主页</a></li>
-									<!-- <li><a href="home-2.html">Home Style 2</a></li>-->
+									<li><a href="{% url 'index' %}" class="active">寻子网主页</a></li>
+									<li><a href="{% url 'bbsindex' %}" class="active">论坛主页</a></li>
+								</ul>
+							</li>
+						</ul>
+						<ul class="nav-menu">
+							<li class="active"><a href="#">其他<span class="submenu-indicator"></span></a>
+								<ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
+									<li><a href="{% url 'apidoc' %}" class="active">获取API</a></li>
 								</ul>
 							</li>
 						</ul>
 
 						<ul class="nav-menu nav-menu-social align-to-right">
+							<li>
+								<a href="#" data-toggle="modal" data-target="#login">
+									<span class="dn-lg"><a href="{% url 'bbsindex' %}" target="_blank">论坛</a></span>
+								</a>
+							</li>
 							<li class="add-listing theme-bg">
 								<button
 									style="height: 100%;width: 100%;background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;">
@@ -71,26 +83,29 @@
 				</div>
 			</div>
 		</section>
-			<div style="margin-top:6%"></div>
-			<center>
-				<h5 style="margin-bottom: 30px;font-size:25px">姓名：{{ name }}</h5>
-				<h5 style="margin-bottom: 30px;font-size:25px">性别：{{ sex }}</h5>
-				<h5 style="margin-bottom: 30px;font-size:25px">出生日期：{{ birthdayY }}年.{{ birthdayM }}月.{{ birthdayD }}日</h5>
-				<h5 style="margin-bottom: 30px;font-size:25px">身高：{{ height }}厘米</h5>
-				<h5 style="margin-bottom: 30px;font-size:25px">体重：{{ weight }}公斤</h5>
-				<h5 style="margin-bottom: 30px;font-size:25px">走失日期：走失日期：{{ inf.timeLY }}年.{{ inf.timeLM }}月.{{ inf.timeLD }}日.{{ inf.timeLH }}时.{{ inf.timeLMin }}分</h5>
-				<h5 style="margin-bottom: 30px;font-size:25px">走失地点：{{ site }}</h5>
-				<h5 style="margin-bottom: 30px;font-size:25px">其他描述：</h5>
-				<h5 style="margin-bottom: 30px;font-size:25px;WORD-BREAK:break-all;width: 60%;">{{ text }}</h5>
-				<h5 style="margin-bottom: 30px;font-size:35px">家属信息</h5>
-				<h5 style="margin-bottom: 30px;font-size:25px">家属称呼：{{ kinName }}</h5>
-				<h5 style="margin-bottom: 30px;font-size:25px">家属联系方式：{{ kinLink }}</h5>
-				<h5 style="margin-bottom: 30px;font-size:25px">失联者照片</h5>
-				{% for i in img %}
-				<center><img src="/media/{{ i }}" style="width: auto;height: auto;max-width: 800px;max-height: 500px;"></center>
-				{% endfor %}
-
+		<div style="margin-top:6%"></div>
+		<center>
+			<h5 style="margin-bottom: 30px;font-size:25px">姓名：{{ name }}</h5>
+			<h5 style="margin-bottom: 30px;font-size:25px">性别：{{ sex }}</h5>
+			<h5 style="margin-bottom: 30px;font-size:25px">出生日期：{{ birthdayY }}年.{{ birthdayM }}月.{{ birthdayD }}日</h5>
+			<h5 style="margin-bottom: 30px;font-size:25px">身高：{{ height }}厘米</h5>
+			<h5 style="margin-bottom: 30px;font-size:25px">体重：{{ weight }}公斤</h5>
+			<h5 style="margin-bottom: 30px;font-size:25px">
+				走失日期：走失日期：{{ inf.timeLY }}年.{{ inf.timeLM }}月.{{ inf.timeLD }}日.{{ inf.timeLH }}时.{{ inf.timeLMin }}分
+			</h5>
+			<h5 style="margin-bottom: 30px;font-size:25px">走失地点：{{ site }}</h5>
+			<h5 style="margin-bottom: 30px;font-size:25px">其他描述：</h5>
+			<h5 style="margin-bottom: 30px;font-size:25px;WORD-BREAK:break-all;width: 60%;">{{ text }}</h5>
+			<h5 style="margin-bottom: 30px;font-size:35px">家属信息</h5>
+			<h5 style="margin-bottom: 30px;font-size:25px">家属称呼：{{ kinName }}</h5>
+			<h5 style="margin-bottom: 30px;font-size:25px">家属联系方式：{{ kinLink }}</h5>
+			<h5 style="margin-bottom: 30px;font-size:25px">失联者照片</h5>
+			{% for i in img %}
+			<center><img src="/media/{{ i }}" style="width: auto;height: auto;max-width: 800px;max-height: 500px;">
 			</center>
+			{% endfor %}
+
+		</center>
 		<div class="clearfix"></div>
 		<section></section>
 		<section></section>
@@ -101,7 +116,7 @@
 			<div>
 				<div class="container">
 					<div class="row">
-		
+
 						<div class="col-lg-3 col-md-3">
 							<div class="footer-widget" style="padding-top:30px;padding-bottom: 30px;">
 								<img src="{% static "assets/img/logo-light.png" %}" class="img-footer" alt="" />
@@ -110,7 +125,7 @@
 									<p><a href="https://space.bilibili.com/175397396" target="_blank">金昊宸</a></p>
 									<!-- <p style='font-size:15'>©2020 dota2饰品吧 版权所有</p> -->
 								</div>
-		
+
 							</div>
 						</div>
 						<div class="col-lg-2-mianze col-md-2-mianze" style="width: 100%;">
@@ -120,7 +135,7 @@
 									<li><a href="http://xunren.baidu.com/index.html" target="_blank">百度寻人</a></li>
 									<li><a href="http://chinaxrw.com/" target="_blank">中国寻人网</a></li>
 									<li><a href="https://www.szrksjzx.com/" target="_blank">寻亲网</a></li>
-		
+
 								</ul>
 							</div>
 						</div>
@@ -141,7 +156,7 @@
 							</div> -->
 					</div>
 				</div>
-		
+
 		</footer>
 		<!-- ============================ Footer End ================================== -->
 	</div>

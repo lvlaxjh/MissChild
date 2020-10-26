@@ -1,7 +1,7 @@
 '''
 Author: your name
 Date: 2020-08-18 13:51:41
-LastEditTime: 2020-09-28 22:58:42
+LastEditTime: 2020-09-29 08:59:08
 LastEditors: Please set LastEditors
 Description: In User Settings Edit
 FilePath: /steamsearch/mainapp/models.py
@@ -78,3 +78,11 @@ class newsImg(models.Model):
         News, on_delete=models.CASCADE, verbose_name="该图片所属信息", default=1)
     imgFile = models.ImageField(
         "消息图片", upload_to="checkImg", null=True, blank=True)
+
+
+class Statistics2(models.Model):
+    id = models.AutoField("唯一id", primary_key=True)
+    visits = models.IntegerField("访问次数", default=0)
+    search = models.IntegerField("搜索次数", default=0)
+    # allrecord = models.IntegerField("登记数量", default=0)
+    upload = models.IntegerField("上传次数", default=0)

@@ -31,14 +31,14 @@
 						<ul class="nav-menu">
 							<li class="active"><a href="#">索引<span class="submenu-indicator"></span></a>
 								<ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
-									<li><a href="{% url 'index' %}" class="active">主页</a></li>
+									<li><a href="{% url 'index' %}" class="active">寻子网主页</a></li>
+									<li><a href="{% url 'bbsindex' %}" class="active">论坛主页</a></li>
 								</ul>
 							</li>
 						</ul>
 						<ul class="nav-menu">
 							<li class="active"><a href="#">其他<span class="submenu-indicator"></span></a>
 								<ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
-									<li><a href="{% url 'index' %}" class="active">加入我们</a></li>
 									<li><a href="{% url 'apidoc' %}" class="active">获取API</a></li>
 								</ul>
 							</li>
@@ -92,7 +92,7 @@
 		<!-- ================================================================================================================================ -->
 		<!-- ========================================================搜索栏=================================================================== -->
 		<!-- ================================================================================================================================ -->
-		<div class="hero-header jumbo-banner text-center" style="background: url({% static "assets/img/banner.jpg" %}"
+		<div class="hero-header jumbo-banner text-center" style="background: url({% static "assets/img/banner2.jpg" %}"
 			);" data-overlay="6">
 			<div class="container" style="margin-top:-2%">
 				<h1>寻子论坛搜索</h1>
@@ -154,14 +154,14 @@
 					<div class="col-lg-3 col-md-3 col-sm-6 b-r">
 						<div class="count-facts">
 							<h4>{{ upload }}</h4>
-							<span>上传次数</span>
+							<span>评论数量</span>
 						</div>
 					</div>
 
 					<div class="col-lg-3 col-md-3 col-sm-6 b-r">
 						<div class="count-facts">
 							<h4>{{ allrecord }}</h4>
-							<span>举报信息数量</span>
+							<span>发帖数量</span>
 						</div>
 					</div>
 

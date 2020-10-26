@@ -6,7 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>查询结果</title>
+	<title>登陆</title>
 	<link href="{% static "assets/css/plugins.css" %}" rel="stylesheet">
 	<link href="{% static "assets/css/styles.css" %}" rel="stylesheet">
 	<link href="{% static "assets/css/skin/default.css" %}" rel="stylesheet">
@@ -36,11 +36,19 @@
 						<ul class="nav-menu">
 							<li class="active"><a href="#">索引<span class="submenu-indicator"></span></a>
 								<ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
-									<li><a href="{% url 'index' %}" class="active">主页</a></li>
-									<!-- <li><a href="home-2.html">Home Style 2</a></li>-->
+									<li><a href="{% url 'index' %}" class="active">寻子网主页</a></li>
+									<li><a href="{% url 'bbsindex' %}" class="active">论坛主页</a></li>
 								</ul>
 							</li>
 						</ul>
+						<ul class="nav-menu">
+							<li class="active"><a href="#">其他<span class="submenu-indicator"></span></a>
+								<ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
+									<li><a href="{% url 'apidoc' %}" class="active">获取API</a></li>
+								</ul>
+							</li>
+						</ul>
+
 
 						<ul class="nav-menu nav-menu-social align-to-right">
 							<li class="add-listing theme-bg">

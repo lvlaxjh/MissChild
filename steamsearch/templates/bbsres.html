@@ -51,8 +51,7 @@
 						<ul class="nav-menu nav-menu-social align-to-right">
 							<li>
 								<a href="#" data-toggle="modal" data-target="#login">
-									<span class="dn-lg" style="font-size:18px"><a
-											href="{% url 'bbsindex' %}">返回论坛</a></span>
+									<span class="dn-lg" style="font-size:18px"><a href="{% url 'bbsindex' %}">返回论坛</a></span>
 								</a>
 							</li>
 							<li class="add-listing theme-bg">
@@ -73,77 +72,43 @@
 		<!-- ================================================================================================================================ -->
 		<!-- ========================================================显示信息================================================================== -->
 		<!-- ================================================================================================================================ -->
-		<section class="small-page-title-banner" style="background-image:url({% static "assets/img/des-10.jpg" %});">
+		<section class="small-page-title-banner" style="background-image:url({% static "assets/img/des-9.jpg" %});">
 			<div class="container">
 				<div class="row">
 					<div class="tr-list-center">
-						<h2 style="font-size: 50px;">{{ title }}</h2>
+						<h2>查询结果</h2>
 					</div>
 				</div>
 			</div>
 		</section>
-		<div style="margin-top:6%"></div>
-		<center>
-			<pre style="margin-bottom: 30px;font-size:23px;WORD-BREAK:break-all;width: 60%;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word;">{{ content }}</pre>
-			{% for i in img %}
-			<center><img src="/media/{{ i }}" style="width: auto;height: auto;max-width: 800px;max-height: 500px;">
-			</center>
-			{% endfor %}
-
-			<div class="clearfix"></div>
-			<section></section>
-			<h4 style="font-size: 30px;">评论区</h4>
-		</center>
 		<section>
 			<div class="container">
 				<div class="row">
-					{% for inf in comm %}
 					<div class="col-md-12">
-						<div class="job-new-list">
-							<div class="vc-content" style="width: 100%;">
-								<ul class="vc-info-list">
-									<li class="list-inline-item" style="width: 100%;">
-										<div style="margin-top:15px"></div>
-										<h5 style="margin-bottom: 7px;font-size:25px;margin-bottom:3%">
-											<b>{{ inf.username }}</b></h5>
-										<h5 style="margin-bottom: 7px;font-size:18px">{{ inf.content }}</h5>
-										{% if inf.username == user %}
-										<form method="POST">
-											<button name="contentBtn" type="submit" value="{{ inf.id }}"
-												style="border:none;background-color: #ff6767;width:5%;height:30px;">删除</button>
-										</form>
-										{% endif %}
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					{% endfor %}
-				</div>
-			</div>
-		</section>
-		<!-- ================================================================================================================================ -->
-		<!-- 评论 -->
-		<!-- ================================================================================================================================ -->
-		{% if user != None %}
-		<section>
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-72 col-md-72">
-						<div class="contact-form">
-							<form method="POST" enctype="multipart/form-data">
-								<div class="form-group">
-									<label style="font-size: 20px;">发条评论</label>
-									<input name="comment" type="text" class="form-control" placeholder="发条友善的评论把～">
+						{% for inf in res %}
+						<a href="{% url 'bbscontent' inf.id  %}">
+							<form method="POST">
+								<div class="job-new-list">
+									<div class="vc-content" style="width: 100%;">
+										<ul class="vc-info-list">
+											<li class="list-inline-item" style="width: 100%;">
+												<div style="margin-top:15px"></div>
+												<h5 style="margin-bottom: 7px;font-size:25px;margin-bottom:3%">
+													<b>{{ inf.title }}</b></h5>
+												<h5 style="margin-bottom: 7px;font-size:18px">{{ inf.content }}</h5>
+											</li>
+										</ul>
+									</div>
 								</div>
-								<button value='subInf' name="subcomm" type="submit" class="btn btn-primary">发送</button>
 							</form>
-						</div>
+						</a>
+						{% endfor %}
 					</div>
 				</div>
 			</div>
-			{% endif %}
 		</section>
+		<div class="clearfix"></div>
+		<section></section>
 		<section></section>
 		<!-- ================================================================================================================================ -->
 		<!-- ========================================================底栏===================================================================== -->

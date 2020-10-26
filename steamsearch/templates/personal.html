@@ -6,7 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>查询结果</title>
+	<title>个人界面</title>
 	<link href="{% static "assets/css/plugins.css" %}" rel="stylesheet">
 	<link href="{% static "assets/css/styles.css" %}" rel="stylesheet">
 	<link href="{% static "assets/css/skin/default.css" %}" rel="stylesheet">
@@ -43,13 +43,20 @@
 						</ul>
 
 						<ul class="nav-menu nav-menu-social align-to-right">
+							<li>
+								<a href="{% url 'bbsindex' %}">
+									<i class="ti-home mr-1"></i><span class="dn-lg">返回论坛主页</span>
+								</a>
+							</li>
 							<li class="add-listing theme-bg">
-								<button
-									style="height: 100%;width: 100%;background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;">
-									<a href="{% url 'index' %}">
-										<i class="ti-plus"></i> 上传
+								<form method="POST">
+								<button type="submit" value="esc" name="escBtn"
+									style="height: 80%;width: 80%;background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;">
+									<a>
+									</i> 退出登陆
 									</a>
 								</button>
+								</form>
 							</li>
 						</ul>
 					</div>

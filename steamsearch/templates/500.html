@@ -37,17 +37,29 @@
 						<ul class="nav-menu">
 							<li class="active"><a href="#">索引<span class="submenu-indicator"></span></a>
 								<ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
-									<li><a href="{% url 'index' %}" class="active">主页</a></li>
-									<!-- <li><a href="home-2.html">Home Style 2</a></li>-->
+									<li><a href="{% url 'index' %}" class="active">寻子网主页</a></li>
+									<li><a href="{% url 'bbsindex' %}" class="active">论坛主页</a></li>
+								</ul>
+							</li>
+						</ul>
+						<ul class="nav-menu">
+							<li class="active"><a href="#">其他<span class="submenu-indicator"></span></a>
+								<ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
+									<li><a href="{% url 'apidoc' %}" class="active">获取API</a></li>
 								</ul>
 							</li>
 						</ul>
 
 						<ul class="nav-menu nav-menu-social align-to-right">
+							<li>
+								<a href="#" data-toggle="modal" data-target="#login">
+									<span class="dn-lg"><a href="{% url 'bbsindex' %}" target="_blank">论坛</a></span>
+								</a>
+							</li>
 							<li class="add-listing theme-bg">
 								<button
 									style="height: 100%;width: 100%;background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;">
-									<a href="{% url 'index' %}">
+									<a href="#upload">
 										<i class="ti-plus"></i> 上传
 									</a>
 								</button>
@@ -62,8 +74,8 @@
 		<!-- ================================================================================================================================ -->
 		<!-- ========================================================搜索栏=================================================================== -->
 		<!-- ================================================================================================================================ -->
-		<div class="hero-header jumbo-banner text-center" style="background: url({% static "assets/img/banner500.jpg" %}"
-			);" data-overlay="6">
+		<div class="hero-header jumbo-banner text-center"
+			style="background: url({% static "assets/img/banner500.jpg" %}" );" data-overlay="6">
 			<div class="container">
 				<h1>500!您的操作导致了网站的意外错误!</h1>
 				<h1 style="font-size:35px">{{ error }}</h1>
@@ -74,33 +86,45 @@
 			<div>
 				<div class="container">
 					<div class="row">
+
 						<div class="col-lg-3 col-md-3">
 							<div class="footer-widget" style="padding-top:30px;padding-bottom: 30px;">
 								<img src="{% static "assets/img/logo-light.png" %}" class="img-footer" alt="" />
 								<div class="footer-add">
-									<p><a href="https://space.bilibili.com/17879830" target="_blank">我爱守剑阁炫炫</a></p>
-									<p><a href="">乌沫</a></p>
-									<p><a href="https://space.bilibili.com/175397396" target="_blank">大碗豆汁儿</a></p>
-									<!-- <p style='font-size:15'>©2020 dota2饰品吧 版权所有</p> -->
+									<h4 class="widget-title">开发者</h4>
+									<p><a href="https://space.bilibili.com/175397396" target="_blank">金昊宸</a></p>
 								</div>
 
 							</div>
 						</div>
 						<div class="col-lg-2-mianze col-md-2-mianze" style="width: 100%;">
-								<div class="footer-widget" style="width: 100%;padding-top:8%;padding-bottom: 30px;">
-									<h4 class="widget-title">免责声明</h4>
-									<ul class="footer-menu">
-										<li><a href="#"></a></li>
-										<li>网站数据查询功能中所有数据均来源于百度贴吧、max+社区以及公开资料整理，
-											查询结果仅供用户参考，并不代表网站立场，我们不对查询结果的真实性、准确性和有效性等承担任何法律责任。
-											若查询结果有误，请直接联系管理员，我们会第一时间给予处理。
-										</li>
-									</ul>
-								</div>
+							<div class="footer-widget" style="width: 100%;padding-top:8%;padding-bottom: 30px;">
+								<h4 class="widget-title">友情连接</h4>
+								<ul class="footer-menu">
+									<li><a href="http://xunren.baidu.com/index.html" target="_blank">百度寻人</a></li>
+									<li><a href="http://chinaxrw.com/" target="_blank">中国寻人网</a></li>
+									<li><a href="https://www.szrksjzx.com/" target="_blank">寻亲网</a></li>
+
+								</ul>
+							</div>
 						</div>
+						<!-- <div class="col-lg-2-mianze2 col-md-2-mianze2" style="width: 100%;">
+													<div class="footer-widget" style="width: 100%;padding-top:8%;padding-bottom: 30px;">
+														<h4 class="widget-title">&nbsp</h4>
+														<ul class="footer-menu">
+															<li><a href="#">123231</a></li>
+															<li><a href="#">123231</a></li>
+															<li><a href="#">123231</a></li>
+															<li><a href="#">123231</a></li>
+															<li><a href="#">123231</a></li>
+															<li><a href="#">123231</a></li>
+															<li><a href="#">123231</a></li>
+														</ul>
+													</div>
+												</div>
+											</div> -->
 					</div>
 				</div>
-			</div>
 
 		</footer>
 		<!-- ============================ Footer End ================================== -->
